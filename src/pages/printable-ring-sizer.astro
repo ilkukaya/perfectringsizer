@@ -1,0 +1,292 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PrintableDownload from '../components/PrintableDownload.astro';
+import AffiliateCTA from '../components/AffiliateCTA.astro';
+import BreadcrumbNav from '../components/BreadcrumbNav.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { generateFAQSchema, generateBreadcrumbSchema, generateWebApplicationSchema } from '../utils/schemaGenerators';
+
+const title = "Free Printable Ring Sizer — Download PDF (Accurate & Easy)";
+const description = "Download our free printable ring sizer PDF. Easy to use at home — just print, cut, and measure. Accurate to within half a size.";
+
+const breadcrumbItems = [
+  { label: 'Printable Ring Sizer', href: '/printable-ring-sizer' },
+];
+
+const faqs = [
+  {
+    question: "How do I make sure the printout is the right size?",
+    answer: "After printing, use the credit card calibration mark included on the PDF. Place a standard credit card (85.6 mm x 53.98 mm) over the outline on the page. If it matches exactly, your print is at the correct scale. If the outline is too large or too small, adjust your printer settings to print at exactly 100% scale with no scaling or fit-to-page options enabled."
+  },
+  {
+    question: "Can I print on any paper?",
+    answer: "Yes, regular printer paper (A4 or US Letter) works fine for measuring. However, if you want a more durable sizer strip that's easier to wrap around your finger, cardstock or heavier paper is a better choice. Avoid glossy photo paper, as the markings can smear and the paper is harder to fold."
+  },
+  {
+    question: "Is the printable sizer accurate?",
+    answer: "Yes, when printed at the correct 100% scale, our printable ring sizer is accurate to within half a ring size. This is comparable to the accuracy of many in-store measurements. For the most reliable results, always verify your print scale using the credit card calibration mark before measuring."
+  },
+  {
+    question: "What if my printer doesn't print at 100%?",
+    answer: "Some printers automatically scale documents even when set to 100%. If you cannot get an accurate printout after adjusting settings, try our free online ring sizer tool instead — it uses your device's screen and requires no printing. You can also visit a local jeweler for a professional measurement."
+  },
+];
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: 'Home', url: 'https://perfectringsizer.netlify.app/' },
+  { name: 'Printable Ring Sizer', url: 'https://perfectringsizer.netlify.app/printable-ring-sizer' },
+]);
+
+const faqSchema = generateFAQSchema(faqs);
+const webAppSchema = generateWebApplicationSchema();
+---
+
+<BaseLayout title={title} description={description} canonical="https://perfectringsizer.netlify.app/printable-ring-sizer">
+  <article class="max-w-4xl mx-auto px-4 py-8 sm:py-12">
+    <BreadcrumbNav items={breadcrumbItems} />
+
+    <header class="mb-10">
+      <h1 class="text-3xl sm:text-4xl font-bold text-[#1B4D3E] mb-4 leading-tight">
+        Free Printable Ring Sizer — Download & Measure at Home
+      </h1>
+      <p class="text-sm text-gray-500 mb-6">Last updated: April 2026</p>
+      <p class="text-gray-700 leading-relaxed text-lg">
+        No jeweler nearby? No problem. Our free printable ring sizer lets you measure your ring size accurately from home. Simply download the PDF, print it at 100% scale, and follow the instructions below. It takes less than two minutes and is accurate to within half a size — perfect for ordering rings online with confidence.
+      </p>
+    </header>
+
+    <!-- Large Download CTA -->
+    <section class="mb-14" aria-label="Download printable ring sizer">
+      <div class="bg-gradient-to-br from-[#1B4D3E] to-[#153D32] rounded-2xl p-8 sm:p-10 text-center text-white shadow-lg">
+        <div class="w-16 h-16 bg-white/15 rounded-2xl flex items-center justify-center mx-auto mb-5">
+          <svg class="w-8 h-8 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+          </svg>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold mb-3">Download Your Free Ring Sizer</h2>
+        <p class="text-white/80 max-w-md mx-auto mb-6 leading-relaxed">
+          Printable PDF with ring sizer strip, circle gauge, and credit card calibration mark. Works on A4 and US Letter paper.
+        </p>
+        <a
+          href="/printable-ring-sizer.pdf"
+          download
+          class="inline-flex items-center gap-2.5 bg-[#D4AF37] hover:bg-[#c9a430] text-white font-bold text-lg py-3.5 px-8 rounded-xl transition-colors shadow-md hover:shadow-lg"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          Download PDF — Free
+        </a>
+        <p class="text-white/50 text-sm mt-4">No signup required. Instant download.</p>
+      </div>
+    </section>
+
+    <!-- How to Use the Printable Ring Sizer -->
+    <section class="mb-14">
+      <SectionHeading title="How to Use the Printable Ring Sizer" id="how-to-use" />
+
+      <ol class="space-y-6">
+        <li class="flex gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-[#1B4D3E] text-white rounded-full flex items-center justify-center font-bold text-lg">1</div>
+          <div>
+            <h3 class="font-semibold text-[#1B4D3E] text-lg mb-1">Download the PDF</h3>
+            <p class="text-gray-700 leading-relaxed">Click the download button above to save the printable ring sizer PDF to your device. The file includes a sizer strip, a circle gauge, and a calibration mark for verifying accuracy.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-[#1B4D3E] text-white rounded-full flex items-center justify-center font-bold text-lg">2</div>
+          <div>
+            <h3 class="font-semibold text-[#1B4D3E] text-lg mb-1">Print at 100% Scale (NOT Fit to Page)</h3>
+            <p class="text-gray-700 leading-relaxed">Open the PDF and print it. The most important step: make sure your printer is set to <strong>100% scale</strong> or <strong>"Actual Size."</strong> Do not select "Fit to Page," "Shrink to Fit," or any other scaling option — this will make the sizer inaccurate.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-[#1B4D3E] text-white rounded-full flex items-center justify-center font-bold text-lg">3</div>
+          <div>
+            <h3 class="font-semibold text-[#1B4D3E] text-lg mb-1">Verify Scale with the Credit Card Calibration Mark</h3>
+            <p class="text-gray-700 leading-relaxed">Before cutting anything, place a standard credit card or ID card over the calibration rectangle printed on the page. The card should line up exactly with the outline. If it doesn't, reprint with adjusted settings.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-[#1B4D3E] text-white rounded-full flex items-center justify-center font-bold text-lg">4</div>
+          <div>
+            <h3 class="font-semibold text-[#1B4D3E] text-lg mb-1">Cut Out the Sizer Strip</h3>
+            <p class="text-gray-700 leading-relaxed">Using scissors, carefully cut along the dotted lines to remove the ring sizer strip from the page. Cut as precisely as possible along the edges for the most accurate measurement.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-[#1B4D3E] text-white rounded-full flex items-center justify-center font-bold text-lg">5</div>
+          <div>
+            <h3 class="font-semibold text-[#1B4D3E] text-lg mb-1">Wrap Around Your Finger</h3>
+            <p class="text-gray-700 leading-relaxed">Thread the tapered end of the strip through the slot, then wrap it around the base of the finger you want to measure. The strip should be snug but comfortable — tight enough that it won't slide off easily, but loose enough to pass over your knuckle.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-[#1B4D3E] text-white rounded-full flex items-center justify-center font-bold text-lg">6</div>
+          <div>
+            <h3 class="font-semibold text-[#1B4D3E] text-lg mb-1">Read Your Size Where the Strip Overlaps</h3>
+            <p class="text-gray-700 leading-relaxed">Look at where the arrow or pointed end meets the numbered scale on the strip. The number at that point is your ring size. The strip shows US sizes and their equivalents in other systems for easy reference.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Important Printing Tips -->
+    <section class="mb-14">
+      <SectionHeading title="Important Printing Tips" id="printing-tips" />
+
+      <div class="bg-[#FAFAF8] border border-[#E5E5E0] rounded-xl p-6 space-y-4">
+        <div class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-[#D4AF37] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          <p class="text-gray-700 leading-relaxed"><strong>Set scaling to 100% / Actual Size.</strong> This is the single most important setting. In most PDF viewers, look for "Page Scaling" or "Scale" in the print dialog and set it to "None" or "Actual Size."</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-[#D4AF37] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          <p class="text-gray-700 leading-relaxed"><strong>Disable "Fit to Page" and "Shrink Oversized Pages."</strong> These options are often enabled by default and will reduce the size of the printout, making measurements inaccurate.</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-[#D4AF37] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          <p class="text-gray-700 leading-relaxed"><strong>Use A4 or US Letter paper.</strong> The PDF is designed for standard paper sizes. Using non-standard paper may cause your printer to auto-scale the document.</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-[#D4AF37] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          <p class="text-gray-700 leading-relaxed"><strong>Print in landscape or portrait — either works.</strong> The sizer strip fits in both orientations. Just make sure the scaling stays at 100%.</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-[#D4AF37] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          <p class="text-gray-700 leading-relaxed"><strong>Always verify with the calibration mark before measuring.</strong> Even with the right settings, some printers add slight margins or adjustments. The credit card check takes five seconds and guarantees accuracy.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Verify Your Print Scale -->
+    <section class="mb-14">
+      <SectionHeading title="Verify Your Print Scale" id="verify-scale" />
+
+      <div class="flex flex-col sm:flex-row items-start gap-6">
+        <div class="flex-shrink-0 w-20 h-14 border-2 border-dashed border-[#D4AF37] rounded-lg flex items-center justify-center">
+          <span class="text-xs text-[#D4AF37] font-semibold">CARD</span>
+        </div>
+        <div>
+          <p class="text-gray-700 leading-relaxed mb-3">
+            The printed PDF includes a rectangle sized to match a standard credit card (85.6 mm x 53.98 mm, as defined by ISO/IEC 7810). After printing, place any credit card, debit card, or government ID on top of this rectangle.
+          </p>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start gap-2">
+              <span class="text-green-600 font-bold mt-0.5">&#10003;</span>
+              <span><strong>Card matches exactly:</strong> Your print is accurate. Proceed with measuring.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-red-500 font-bold mt-0.5">&#10007;</span>
+              <span><strong>Card is larger than the outline:</strong> Your printout is too small. Disable any scaling options and reprint.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-red-500 font-bold mt-0.5">&#10007;</span>
+              <span><strong>Card is smaller than the outline:</strong> Your printout is too large. Check that zoom/scale is set to 100%, not a higher value.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alternative Methods -->
+    <section class="mb-14">
+      <SectionHeading title="Alternative Methods" id="alternative-methods" />
+
+      <p class="text-gray-700 leading-relaxed mb-6">
+        If printing isn't an option, there are other reliable ways to measure your ring size at home:
+      </p>
+
+      <div class="grid sm:grid-cols-3 gap-4">
+        <a href="/" class="block p-5 bg-[#FAFAF8] border border-[#E5E5E0] rounded-lg hover:border-[#D4AF37]/50 hover:bg-[#D4AF37]/5 transition-colors text-center">
+          <div class="w-10 h-10 bg-[#1B4D3E]/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+            <svg class="w-5 h-5 text-[#1B4D3E]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-[#1B4D3E] mb-1">Online Ring Sizer</h3>
+          <p class="text-sm text-gray-600">Measure using your screen — no printing needed</p>
+        </a>
+        <a href="/ring-size-converter" class="block p-5 bg-[#FAFAF8] border border-[#E5E5E0] rounded-lg hover:border-[#D4AF37]/50 hover:bg-[#D4AF37]/5 transition-colors text-center">
+          <div class="w-10 h-10 bg-[#1B4D3E]/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+            <svg class="w-5 h-5 text-[#1B4D3E]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-[#1B4D3E] mb-1">Size Converter</h3>
+          <p class="text-sm text-gray-600">Already know your size? Convert between systems</p>
+        </a>
+        <a href="/mm-to-ring-size" class="block p-5 bg-[#FAFAF8] border border-[#E5E5E0] rounded-lg hover:border-[#D4AF37]/50 hover:bg-[#D4AF37]/5 transition-colors text-center">
+          <div class="w-10 h-10 bg-[#1B4D3E]/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+            <svg class="w-5 h-5 text-[#1B4D3E]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-[#1B4D3E] mb-1">String / Paper Method</h3>
+          <p class="text-sm text-gray-600">Measure with string or paper strip and a ruler</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Affiliate CTA -->
+    <AffiliateCTA text="Found your size? Browse rings from top jewelers" />
+
+    <!-- FAQ Section -->
+    <section class="mb-14">
+      <SectionHeading title="Frequently Asked Questions" id="faq" />
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="group bg-[#FAFAF8] border border-[#E5E5E0] rounded-lg overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer select-none hover:bg-[#D4AF37]/5 transition-colors">
+              <span class="font-medium text-[#1B4D3E]">{faq.question}</span>
+              <svg class="w-5 h-5 text-gray-400 flex-shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-5 pb-4 text-gray-700 leading-relaxed">
+              {faq.answer}
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Related Links -->
+    <section class="mb-8">
+      <SectionHeading title="Related Resources" id="related" />
+      <div class="grid sm:grid-cols-2 gap-3">
+        <a href="/ring-size-converter" class="block p-4 bg-[#FAFAF8] border border-[#E5E5E0] rounded-lg hover:border-[#D4AF37]/50 hover:bg-[#D4AF37]/5 transition-colors">
+          <span class="font-medium text-[#1B4D3E]">Ring Size Converter</span>
+          <p class="text-sm text-gray-600 mt-1">Convert between US, UK, EU, and JP sizes instantly</p>
+        </a>
+        <a href="/" class="block p-4 bg-[#FAFAF8] border border-[#E5E5E0] rounded-lg hover:border-[#D4AF37]/50 hover:bg-[#D4AF37]/5 transition-colors">
+          <span class="font-medium text-[#1B4D3E]">Online Ring Sizer Tool</span>
+          <p class="text-sm text-gray-600 mt-1">Measure your ring size digitally using your screen</p>
+        </a>
+        <a href="/us-to-eu-ring-size" class="block p-4 bg-[#FAFAF8] border border-[#E5E5E0] rounded-lg hover:border-[#D4AF37]/50 hover:bg-[#D4AF37]/5 transition-colors">
+          <span class="font-medium text-[#1B4D3E]">US to EU Size Chart</span>
+          <p class="text-sm text-gray-600 mt-1">Detailed US to European conversion table</p>
+        </a>
+        <a href="/mm-to-ring-size" class="block p-4 bg-[#FAFAF8] border border-[#E5E5E0] rounded-lg hover:border-[#D4AF37]/50 hover:bg-[#D4AF37]/5 transition-colors">
+          <span class="font-medium text-[#1B4D3E]">MM to Ring Size</span>
+          <p class="text-sm text-gray-600 mt-1">Convert millimeter measurements to standard sizes</p>
+        </a>
+      </div>
+    </section>
+  </article>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
+</BaseLayout>

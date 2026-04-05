@@ -1,0 +1,51 @@
+{
+  "tiffany": {
+    "name": "Tiffany & Co.",
+    "slug": "tiffany-ring-size-guide",
+    "sizing": "Uses US standard sizing",
+    "resizing": "Complimentary resizing within one year",
+    "notes": "Sizes typically run true to standard US sizes"
+  },
+  "cartier": {
+    "name": "Cartier",
+    "slug": "cartier-ring-size-guide",
+    "sizing": "Uses European (EU) sizing as default",
+    "resizing": "Free resizing for Cartier purchases",
+    "notes": "Cartier Love bracelets use a different sizing system"
+  },
+  "pandora": {
+    "name": "Pandora",
+    "slug": "pandora-ring-size-guide",
+    "sizing": "Uses inner circumference in mm (EU system)",
+    "resizing": "Exchange for different size within 30 days",
+    "notes": "Pandora rings tend to run slightly small"
+  },
+  "swarovski": {
+    "name": "Swarovski",
+    "slug": "swarovski-ring-size-guide",
+    "sizing": "Uses EU sizing (inner circumference in mm)",
+    "resizing": "Exchange only, no resizing service",
+    "notes": "Crystal rings cannot be resized"
+  },
+  "bluenile": {
+    "name": "Blue Nile",
+    "slug": "blue-nile-ring-size",
+    "sizing": "Uses US standard sizing with quarter sizes available",
+    "resizing": "One free resizing within first year",
+    "notes": "Offers a free ring sizer tool by mail"
+  },
+  "jamesallen": {
+    "name": "James Allen",
+    "slug": "james-allen-ring-size",
+    "sizing": "Uses US standard sizing",
+    "resizing": "One free resizing within first year",
+    "notes": "Free ring sizer kit available"
+  },
+  "brilliantearth": {
+    "name": "Brilliant Earth",
+    "slug": "brilliant-earth-ring-size",
+    "sizing": "Uses US standard sizing with quarter sizes",
+    "resizing": "Free resizing within 60 days",
+    "notes": "Offers complimentary ring sizing kit"
+  }
+}

@@ -1,0 +1,32 @@
+---
+import affiliates from '../data/affiliates.json';
+
+interface Props {
+  text?: string;
+  affiliate?: string;
+}
+
+const {
+  text = 'Ready to buy? Find your perfect ring',
+  affiliate = 'bluenile',
+} = Astro.props;
+
+const data = affiliates[affiliate as keyof typeof affiliates] ?? affiliates.bluenile;
+---
+
+<a
+  href={data.url}
+  target="_blank"
+  rel="noopener nofollow sponsored"
+  class="flex items-center justify-between gap-4 bg-[#FAFAF8] border border-[#E5E5E0] rounded-lg px-5 py-3.5 hover:border-[#D4AF37]/50 hover:bg-[#D4AF37]/5 transition-colors group my-6"
+>
+  <span class="text-sm font-medium text-gray-700 group-hover:text-[#1B4D3E] transition-colors">
+    {text}
+  </span>
+  <span class="flex-shrink-0 text-[#D4AF37] font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+    {data.name}
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </span>
+</a>

@@ -1,0 +1,214 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SizeConverter from '../components/SizeConverter.astro';
+import ConversionTable from '../components/ConversionTable.astro';
+import AffiliateCTA from '../components/AffiliateCTA.astro';
+import BreadcrumbNav from '../components/BreadcrumbNav.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { generateFAQSchema, generateBreadcrumbSchema, generateWebApplicationSchema } from '../utils/schemaGenerators';
+
+const title = "Ring Size Converter — Instantly Convert US, UK, EU, JP Sizes";
+const description = "Free ring size converter. Instantly convert between US, UK, EU, Japanese, and metric ring sizes. Accurate results based on ISO standards.";
+
+const breadcrumbItems = [
+  { label: 'Ring Size Converter', href: '/ring-size-converter' },
+];
+
+const faqs = [
+  {
+    question: "How do I convert my US ring size to EU?",
+    answer: "To convert a US ring size to EU, you can use the formula: EU size = (US size × 1.23) + 36.5 (approximate). However, for precise results, use our converter tool above — it references ISO 8653 standard measurements to ensure accuracy across all sizing systems."
+  },
+  {
+    question: "Are UK and Australian ring sizes the same?",
+    answer: "Yes, UK and Australian ring sizes use the same letter-based scale (A through Z and beyond). This system is also used in New Zealand, Ireland, and South Africa. A UK size L is identical to an Australian size L."
+  },
+  {
+    question: "What is my ring size in mm?",
+    answer: "To find your ring size in millimeters, use our converter above. Enter your known ring size in any system (US, UK, EU, or JP) and the tool will display the corresponding inner diameter and circumference in millimeters. For example, a US size 7 corresponds to approximately 17.3 mm inner diameter."
+  },
+  {
+    question: "Is there a difference between men's and women's sizing scales?",
+    answer: "No, men's and women's rings use the same sizing scale in all systems. The only difference is the typical range — women's rings commonly fall between US sizes 4–8, while men's rings typically range from US sizes 8–14. The numbering system itself is identical."
+  },
+  {
+    question: "Why do different countries use different ring size systems?",
+    answer: "Different ring size systems developed independently across regions for historical reasons. The US adopted a numerical system in the early 1900s, the UK inherited a letter-based system from traditional jewelers, and European countries standardized on inner circumference measurements (ISO 8653). Japan developed its own numerical system based on the Japanese Industrial Standards (JIS)."
+  },
+];
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: 'Home', url: 'https://perfectringsizer.netlify.app/' },
+  { name: 'Ring Size Converter', url: 'https://perfectringsizer.netlify.app/ring-size-converter' },
+]);
+
+const faqSchema = generateFAQSchema(faqs);
+const webAppSchema = generateWebApplicationSchema();
+---
+
+<BaseLayout title={title} description={description} canonical="https://perfectringsizer.netlify.app/ring-size-converter">
+  <article class="max-w-4xl mx-auto px-4 py-8 sm:py-12">
+    <BreadcrumbNav items={breadcrumbItems} />
+
+    <header class="mb-10">
+      <h1 class="text-3xl sm:text-4xl font-bold text-[#1B4D3E] mb-4 leading-tight">
+        Ring Size Converter: Convert Between Any System Instantly
+      </h1>
+      <p class="text-sm text-gray-500 mb-6">Last updated: April 2026</p>
+      <p class="text-gray-700 leading-relaxed text-lg">
+        Ring sizing varies across the world — the US uses numbers, the UK uses letters, Europe measures circumference, and Japan has its own numbering. Whether you're shopping internationally, buying a ring from overseas, or just curious how your size translates, our free converter makes it simple. Select your known size in any system and get instant, accurate conversions to every other standard.
+      </p>
+    </header>
+
+    <!-- Main Converter Tool -->
+    <section class="mb-14" aria-label="Ring size converter tool">
+      <SizeConverter />
+    </section>
+
+    <!-- Understanding Ring Size Systems -->
+    <section class="mb-14">
+      <SectionHeading title="Understanding Ring Size Systems" id="sizing-systems" />
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-semibold text-[#1B4D3E] mb-2">US & Canada — Numerical Scale (1–16)</h3>
+          <p class="text-gray-700 leading-relaxed">
+            The most common system in North America uses whole and half numbers, typically ranging from size 1 to size 16. Each full size increment equals approximately 0.8 mm in diameter. Half sizes are widely available, and some jewelers also offer quarter sizes for a more precise fit. This is the default system used by most American and Canadian jewelers.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-[#1B4D3E] mb-2">UK & Australia — Letter-Based Scale (A–Z)</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Used in the United Kingdom, Ireland, Australia, New Zealand, and South Africa, this system assigns letters of the alphabet to ring sizes. It starts at A (the smallest) and extends beyond Z for larger sizes (Z+1, Z+2, etc.). Each half letter represents roughly 0.4 mm in diameter change. A UK size L is approximately equivalent to a US size 6.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-[#1B4D3E] mb-2">EU / ISO — Inner Circumference in Millimeters</h3>
+          <p class="text-gray-700 leading-relaxed">
+            The European system, standardized under ISO 8653, is based on the inner circumference of the ring measured in millimeters. For example, an EU size 52 means the ring's inner circumference is 52 mm. This is the most mathematically precise system and is used throughout continental Europe, Scandinavia, and increasingly worldwide as an international reference.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-[#1B4D3E] mb-2">Japan — JIS Numerical Scale</h3>
+          <p class="text-gray-700 leading-relaxed">
+            The Japanese ring size system uses whole numbers starting from 1, defined by the Japanese Industrial Standards (JIS). A Japanese size 1 corresponds to approximately 13 mm inner diameter (roughly a US size 1). The scale increments in consistent steps and is used exclusively in Japan by local jewelers and online retailers.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-[#1B4D3E] mb-2">Diameter & Circumference — Universal Metric Measurements</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Regardless of regional sizing systems, every ring can be described by two universal metric measurements: inner diameter (in mm) and inner circumference (in mm). These measurements are the foundation of all sizing systems and provide the most accurate way to communicate ring size internationally. Our converter displays both values for every size.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Conversion Reference Table -->
+    <section class="mb-14">
+      <SectionHeading title="Quick Conversion Reference" id="conversion-table" />
+      <ConversionTable />
+    </section>
+
+    <!-- Most Popular Conversions -->
+    <section class="mb-14">
+      <SectionHeading title="Most Popular Conversions" id="popular-conversions" />
+      <ul class="grid sm:grid-cols-2 gap-3">
+        <li>
+          <a href="/us-to-eu-ring-size" class="flex items-center gap-2 p-4 bg-[#FAFAF8] border border-[#E5E5E0] rounded-lg hover:border-[#D4AF37]/50 hover:bg-[#D4AF37]/5 transition-colors group">
+            <span class="text-[#D4AF37] font-bold text-lg">US</span>
+            <svg class="w-4 h-4 text-gray-400 group-hover:text-[#D4AF37] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+            <span class="text-[#1B4D3E] font-bold text-lg">EU</span>
+            <span class="ml-auto text-sm text-gray-600 group-hover:text-[#1B4D3E] transition-colors">US to EU Ring Size</span>
+          </a>
+        </li>
+        <li>
+          <a href="/uk-to-us-ring-size" class="flex items-center gap-2 p-4 bg-[#FAFAF8] border border-[#E5E5E0] rounded-lg hover:border-[#D4AF37]/50 hover:bg-[#D4AF37]/5 transition-colors group">
+            <span class="text-[#D4AF37] font-bold text-lg">UK</span>
+            <svg class="w-4 h-4 text-gray-400 group-hover:text-[#D4AF37] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+            <span class="text-[#1B4D3E] font-bold text-lg">US</span>
+            <span class="ml-auto text-sm text-gray-600 group-hover:text-[#1B4D3E] transition-colors">UK to US Ring Size</span>
+          </a>
+        </li>
+        <li>
+          <a href="/cm-to-ring-size" class="flex items-center gap-2 p-4 bg-[#FAFAF8] border border-[#E5E5E0] rounded-lg hover:border-[#D4AF37]/50 hover:bg-[#D4AF37]/5 transition-colors group">
+            <span class="text-[#D4AF37] font-bold text-lg">CM</span>
+            <svg class="w-4 h-4 text-gray-400 group-hover:text-[#D4AF37] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+            <span class="text-[#1B4D3E] font-bold text-lg">Size</span>
+            <span class="ml-auto text-sm text-gray-600 group-hover:text-[#1B4D3E] transition-colors">CM to Ring Size</span>
+          </a>
+        </li>
+        <li>
+          <a href="/mm-to-ring-size" class="flex items-center gap-2 p-4 bg-[#FAFAF8] border border-[#E5E5E0] rounded-lg hover:border-[#D4AF37]/50 hover:bg-[#D4AF37]/5 transition-colors group">
+            <span class="text-[#D4AF37] font-bold text-lg">MM</span>
+            <svg class="w-4 h-4 text-gray-400 group-hover:text-[#D4AF37] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+            <span class="text-[#1B4D3E] font-bold text-lg">Size</span>
+            <span class="ml-auto text-sm text-gray-600 group-hover:text-[#1B4D3E] transition-colors">MM to Ring Size</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Affiliate CTA -->
+    <AffiliateCTA text="Know your size? Shop for the perfect ring" />
+
+    <!-- FAQ Section -->
+    <section class="mb-14">
+      <SectionHeading title="Frequently Asked Questions" id="faq" />
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="group bg-[#FAFAF8] border border-[#E5E5E0] rounded-lg overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer select-none hover:bg-[#D4AF37]/5 transition-colors">
+              <span class="font-medium text-[#1B4D3E]">{faq.question}</span>
+              <svg class="w-5 h-5 text-gray-400 flex-shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-5 pb-4 text-gray-700 leading-relaxed">
+              {faq.answer}
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Related Links -->
+    <section class="mb-8">
+      <SectionHeading title="Related Resources" id="related" />
+      <div class="grid sm:grid-cols-2 gap-3">
+        <a href="/printable-ring-sizer" class="block p-4 bg-[#FAFAF8] border border-[#E5E5E0] rounded-lg hover:border-[#D4AF37]/50 hover:bg-[#D4AF37]/5 transition-colors">
+          <span class="font-medium text-[#1B4D3E]">Free Printable Ring Sizer</span>
+          <p class="text-sm text-gray-600 mt-1">Download our PDF ring sizer for at-home measuring</p>
+        </a>
+        <a href="/us-to-eu-ring-size" class="block p-4 bg-[#FAFAF8] border border-[#E5E5E0] rounded-lg hover:border-[#D4AF37]/50 hover:bg-[#D4AF37]/5 transition-colors">
+          <span class="font-medium text-[#1B4D3E]">US to EU Ring Size Chart</span>
+          <p class="text-sm text-gray-600 mt-1">Detailed conversion chart with half sizes</p>
+        </a>
+        <a href="/uk-to-us-ring-size" class="block p-4 bg-[#FAFAF8] border border-[#E5E5E0] rounded-lg hover:border-[#D4AF37]/50 hover:bg-[#D4AF37]/5 transition-colors">
+          <span class="font-medium text-[#1B4D3E]">UK to US Ring Size Chart</span>
+          <p class="text-sm text-gray-600 mt-1">Convert letter sizes to US number sizes</p>
+        </a>
+        <a href="/mm-to-ring-size" class="block p-4 bg-[#FAFAF8] border border-[#E5E5E0] rounded-lg hover:border-[#D4AF37]/50 hover:bg-[#D4AF37]/5 transition-colors">
+          <span class="font-medium text-[#1B4D3E]">MM to Ring Size</span>
+          <p class="text-sm text-gray-600 mt-1">Convert millimeter measurements to standard sizes</p>
+        </a>
+      </div>
+    </section>
+  </article>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
+</BaseLayout>

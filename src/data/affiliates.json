@@ -1,0 +1,26 @@
+{
+  "bluenile": {
+    "name": "Blue Nile",
+    "url": "https://www.bluenile.com/?utm_source=perfectringsizer",
+    "description": "Industry-leading online jeweler with 50,000+ diamonds",
+    "cta": "Shop at Blue Nile",
+    "features": ["Free shipping", "Free resizing", "30-day returns", "GIA certified diamonds"],
+    "bestFor": "Best overall value"
+  },
+  "jamesallen": {
+    "name": "James Allen",
+    "url": "https://www.jamesallen.com/?utm_source=perfectringsizer",
+    "description": "360° diamond viewing technology with 200,000+ diamonds",
+    "cta": "Browse James Allen",
+    "features": ["360° diamond view", "Free engraving", "Lifetime warranty", "Free resizing"],
+    "bestFor": "Best diamond selection"
+  },
+  "brilliantearth": {
+    "name": "Brilliant Earth",
+    "url": "https://www.brilliantearth.com/?utm_source=perfectringsizer",
+    "description": "Ethically sourced, conflict-free diamonds and gemstones",
+    "cta": "Explore Brilliant Earth",
+    "features": ["Ethically sourced", "Lab-grown options", "Free shipping", "Free resizing"],
+    "bestFor": "Best for ethical jewelry"
+  }
+}

@@ -1,0 +1,418 @@
+---
+// RingSizerTool.astro - Interactive multi-step ring sizing tool
+---
+
+<div id="ring-sizer-tool" class="bg-surface rounded-xl border border-border p-6 md:p-8 shadow-md max-w-2xl mx-auto">
+  <!-- Step Indicator -->
+  <div class="flex items-center justify-center gap-2 mb-8">
+    {[1, 2, 3].map((n) => (
+      <div class="flex items-center gap-2">
+        <div
+          data-step-dot={n}
+          class="w-9 h-9 rounded-full flex items-center justify-center text-sm font-semibold border-2 transition-colors duration-200"
+        >
+          {n}
+        </div>
+        {n < 3 && (
+          <div class="flex items-center gap-1">
+            <div data-step-line={n} class="w-12 h-0.5 bg-border transition-colors duration-200 rounded-full"></div>
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+  <p id="step-label" class="text-center text-xs text-text-muted mb-6 font-medium tracking-wide uppercase">Step 1 of 3</p>
+
+  <!-- Step 1: Screen Calibration -->
+  <div id="step-1" class="step-panel">
+    <h3 class="text-center mb-2">Screen Calibration</h3>
+    <p class="text-text-secondary text-center text-sm mb-6">
+      Place a standard credit card on your screen and adjust the slider until the rectangle matches exactly.
+    </p>
+    <div class="flex justify-center mb-6">
+      <div
+        id="credit-card-rect"
+        class="border-2 border-accent rounded-lg flex items-center justify-center text-text-muted text-xs select-none"
+        style="background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(212,175,55,0.06) 8px, rgba(212,175,55,0.06) 16px);"
+      >
+        <span class="pointer-events-none">85.6 mm &times; 53.98 mm</span>
+      </div>
+    </div>
+    <div class="mb-2">
+      <label for="calibration-slider" class="block text-sm font-medium text-text-secondary mb-1">
+        Adjust size to match your card
+      </label>
+      <input
+        type="range"
+        id="calibration-slider"
+        min="200"
+        max="600"
+        value="324"
+        class="w-full accent-primary"
+      />
+    </div>
+    <p class="text-xs text-text-muted mb-6 text-center">
+      Pixel-to-mm ratio: <span id="px-ratio-display">3.78</span> px/mm
+    </p>
+    <div class="flex justify-end">
+      <button id="calibrate-next" class="btn-primary">Next &rarr;</button>
+    </div>
+  </div>
+
+  <!-- Step 2: Measurement -->
+  <div id="step-2" class="step-panel hidden">
+    <h3 class="text-center mb-2">Measure Your Ring Size</h3>
+    <p class="text-text-secondary text-center text-sm mb-6">
+      Choose a measurement method below.
+    </p>
+
+    <!-- Tabs -->
+    <div class="flex border-b border-border mb-6" role="tablist">
+      <button
+        data-tab="ring"
+        role="tab"
+        aria-selected="true"
+        class="tab-btn flex-1 py-2 text-sm font-semibold text-center border-b-2 border-primary text-primary transition-colors"
+      >
+        Measure with Ring
+      </button>
+      <button
+        data-tab="circumference"
+        role="tab"
+        aria-selected="false"
+        class="tab-btn flex-1 py-2 text-sm font-semibold text-center border-b-2 border-transparent text-text-muted transition-colors hover:text-text-secondary"
+      >
+        Measure by Circumference
+      </button>
+    </div>
+
+    <!-- Tab A: Ring -->
+    <div id="tab-ring" class="tab-panel">
+      <p class="text-sm text-text-secondary mb-4 text-center">
+        Place your ring on the screen and adjust the circle to match the <strong>inner diameter</strong>.
+      </p>
+      <div class="flex justify-center mb-4">
+        <div
+          id="ring-circle"
+          class="rounded-full border-2 border-primary flex items-center justify-center transition-all duration-100"
+          style="width: 60px; height: 60px;"
+        >
+          <span id="ring-diameter-label" class="text-xs text-text-muted pointer-events-none">15.7 mm</span>
+        </div>
+      </div>
+      <div class="mb-6">
+        <label for="ring-slider" class="block text-sm font-medium text-text-secondary mb-1">
+          Adjust diameter
+        </label>
+        <input
+          type="range"
+          id="ring-slider"
+          min="12"
+          max="25"
+          step="0.1"
+          value="15.7"
+          class="w-full accent-primary"
+        />
+      </div>
+    </div>
+
+    <!-- Tab B: Circumference -->
+    <div id="tab-circumference" class="tab-panel hidden">
+      <p class="text-sm text-text-secondary mb-4 text-center">
+        Enter the circumference of your finger or ring.
+      </p>
+      <div class="flex gap-3 items-end mb-6">
+        <div class="flex-1">
+          <label for="circ-input" class="block text-sm font-medium text-text-secondary mb-1">
+            Circumference
+          </label>
+          <input
+            type="number"
+            id="circ-input"
+            step="0.1"
+            min="30"
+            max="85"
+            placeholder="e.g. 52.4"
+            class="w-full px-3 py-2 border border-border rounded-lg bg-surface text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+          />
+        </div>
+        <div class="w-28">
+          <label for="circ-unit" class="block text-sm font-medium text-text-secondary mb-1">
+            Unit
+          </label>
+          <select
+            id="circ-unit"
+            class="w-full px-3 py-2 border border-border rounded-lg bg-surface text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+          >
+            <option value="mm">mm</option>
+            <option value="cm">cm</option>
+            <option value="in">inches</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-between">
+      <button id="measure-back" class="px-4 py-2 text-sm text-text-secondary border border-border rounded-lg hover:bg-gray-50 transition-colors">
+        &larr; Back
+      </button>
+      <button id="find-size-btn" class="btn-primary">Find My Size</button>
+    </div>
+  </div>
+
+  <!-- Step 3: Results -->
+  <div id="step-3" class="step-panel hidden">
+    <div class="text-center mb-6">
+      <p class="text-text-muted text-sm mb-1">Your Ring Size</p>
+      <p id="result-us-size" class="text-5xl font-bold text-primary mb-1"></p>
+      <p id="result-between" class="text-sm text-accent font-medium hidden">
+        Your measurement falls between sizes. We recommend trying both.
+      </p>
+    </div>
+
+    <div class="overflow-x-auto mb-6">
+      <table id="result-table" class="w-full text-sm">
+        <thead>
+          <tr>
+            <th class="rounded-tl-lg">System</th>
+            <th class="rounded-tr-lg">Size</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="font-medium">US / Canada</td><td id="res-us"></td></tr>
+          <tr><td class="font-medium">UK / Australia</td><td id="res-uk"></td></tr>
+          <tr><td class="font-medium">EU / ISO</td><td id="res-eu"></td></tr>
+          <tr><td class="font-medium">Japan</td><td id="res-jp"></td></tr>
+          <tr><td class="font-medium">Diameter</td><td id="res-dia"></td></tr>
+          <tr><td class="font-medium">Circumference</td><td id="res-circ"></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="text-center mb-4">
+      <a
+        href="#affiliate-section"
+        class="inline-block text-accent font-semibold hover:text-accent-light transition-colors"
+      >
+        Know your size? Find your perfect ring &rarr;
+      </a>
+    </div>
+
+    <div class="flex justify-center">
+      <button id="measure-again" class="px-4 py-2 text-sm text-text-secondary border border-border rounded-lg hover:bg-gray-50 transition-colors">
+        Measure Again
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const SIZES = [
+    { us:"1",uk:"B\u00bd",eu:"38",jp:"1",d:12.4,c:39.1 },
+    { us:"1.5",uk:"C\u00bd",eu:"40",jp:"2",d:12.8,c:40.4 },
+    { us:"2",uk:"D",eu:"41",jp:"2",d:13.2,c:41.7 },
+    { us:"2.5",uk:"E",eu:"42",jp:"3",d:13.6,c:42.9 },
+    { us:"3",uk:"F\u00bd",eu:"44",jp:"4",d:14.0,c:44.2 },
+    { us:"3.5",uk:"G\u00bd",eu:"45",jp:"5",d:14.4,c:45.5 },
+    { us:"4",uk:"H",eu:"47",jp:"7",d:14.9,c:46.8 },
+    { us:"4.5",uk:"I",eu:"48",jp:"8",d:15.3,c:48.0 },
+    { us:"5",uk:"J\u00bd",eu:"49",jp:"9",d:15.7,c:49.3 },
+    { us:"5.5",uk:"K\u00bd",eu:"50",jp:"10",d:16.1,c:50.6 },
+    { us:"6",uk:"L\u00bd",eu:"52",jp:"12",d:16.5,c:51.8 },
+    { us:"6.5",uk:"M\u00bd",eu:"53",jp:"13",d:16.9,c:53.1 },
+    { us:"7",uk:"N\u00bd",eu:"54",jp:"14",d:17.3,c:54.4 },
+    { us:"7.5",uk:"O\u00bd",eu:"56",jp:"15",d:17.7,c:55.7 },
+    { us:"8",uk:"P\u00bd",eu:"57",jp:"16",d:18.1,c:56.9 },
+    { us:"8.5",uk:"Q\u00bd",eu:"58",jp:"17",d:18.5,c:58.2 },
+    { us:"9",uk:"R\u00bd",eu:"59",jp:"19",d:19.0,c:59.5 },
+    { us:"9.5",uk:"S\u00bd",eu:"61",jp:"20",d:19.4,c:60.8 },
+    { us:"10",uk:"T\u00bd",eu:"62",jp:"21",d:19.8,c:62.1 },
+    { us:"10.5",uk:"U\u00bd",eu:"63",jp:"22",d:20.2,c:63.4 },
+    { us:"11",uk:"V\u00bd",eu:"65",jp:"23",d:20.6,c:64.6 },
+    { us:"11.5",uk:"W\u00bd",eu:"66",jp:"24",d:21.0,c:65.9 },
+    { us:"12",uk:"X\u00bd",eu:"67",jp:"25",d:21.4,c:67.2 },
+    { us:"12.5",uk:"Z",eu:"68",jp:"26",d:21.8,c:68.5 },
+    { us:"13",uk:"Z+1",eu:"69",jp:"27",d:22.2,c:69.7 },
+    { us:"13.5",uk:"Z+1.5",eu:"71",jp:"28",d:22.6,c:71.0 },
+    { us:"14",uk:"Z+2",eu:"72",jp:"29",d:23.0,c:72.3 },
+    { us:"14.5",uk:"Z+2.5",eu:"73",jp:"30",d:23.4,c:73.6 },
+    { us:"15",uk:"Z+3",eu:"74",jp:"31",d:23.8,c:74.8 },
+    { us:"15.5",uk:"Z+3.5",eu:"76",jp:"32",d:24.2,c:76.1 },
+    { us:"16",uk:"Z+4",eu:"77",jp:"33",d:24.6,c:77.4 }
+  ];
+
+  // Credit card ISO 7810 dimensions in mm
+  var CARD_W_MM = 85.6;
+  var CARD_H_MM = 53.98;
+
+  var pxPerMm = 3.78; // default ~96 DPI
+  var currentStep = 1;
+  var activeTab = 'ring';
+
+  // DOM refs
+  var cardRect = document.getElementById('credit-card-rect');
+  var calSlider = document.getElementById('calibration-slider');
+  var pxRatioDisplay = document.getElementById('px-ratio-display');
+  var stepLabel = document.getElementById('step-label');
+  var ringCircle = document.getElementById('ring-circle');
+  var ringSlider = document.getElementById('ring-slider');
+  var ringDiamLabel = document.getElementById('ring-diameter-label');
+  var circInput = document.getElementById('circ-input');
+  var circUnit = document.getElementById('circ-unit');
+  var resultBetween = document.getElementById('result-between');
+
+  // Step navigation
+  function showStep(n) {
+    currentStep = n;
+    document.querySelectorAll('.step-panel').forEach(function(el) { el.classList.add('hidden'); });
+    document.getElementById('step-' + n).classList.remove('hidden');
+    stepLabel.textContent = 'Step ' + n + ' of 3';
+
+    for (var i = 1; i <= 3; i++) {
+      var dot = document.querySelector('[data-step-dot="' + i + '"]');
+      var line = document.querySelector('[data-step-line="' + i + '"]');
+      if (i <= n) {
+        dot.classList.add('bg-primary', 'border-primary', 'text-white');
+        dot.classList.remove('border-border', 'text-text-muted');
+      } else {
+        dot.classList.remove('bg-primary', 'border-primary', 'text-white');
+        dot.classList.add('border-border', 'text-text-muted');
+      }
+      if (line) {
+        if (i < n) {
+          line.classList.add('bg-primary');
+          line.classList.remove('bg-border');
+        } else {
+          line.classList.remove('bg-primary');
+          line.classList.add('bg-border');
+        }
+      }
+    }
+  }
+
+  // Step 1: Calibration
+  function updateCard() {
+    var widthPx = parseInt(calSlider.value, 10);
+    var heightPx = widthPx * (CARD_H_MM / CARD_W_MM);
+    cardRect.style.width = widthPx + 'px';
+    cardRect.style.height = Math.round(heightPx) + 'px';
+    pxPerMm = widthPx / CARD_W_MM;
+    pxRatioDisplay.textContent = pxPerMm.toFixed(2);
+  }
+  calSlider.addEventListener('input', updateCard);
+  updateCard();
+
+  document.getElementById('calibrate-next').addEventListener('click', function () {
+    showStep(2);
+    updateRingCircle();
+  });
+
+  // Step 2: Tabs
+  document.querySelectorAll('.tab-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      activeTab = btn.getAttribute('data-tab');
+      document.querySelectorAll('.tab-btn').forEach(function (b) {
+        b.classList.remove('border-primary', 'text-primary');
+        b.classList.add('border-transparent', 'text-text-muted');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('border-primary', 'text-primary');
+      btn.classList.remove('border-transparent', 'text-text-muted');
+      btn.setAttribute('aria-selected', 'true');
+      document.getElementById('tab-ring').classList.toggle('hidden', activeTab !== 'ring');
+      document.getElementById('tab-circumference').classList.toggle('hidden', activeTab !== 'circumference');
+    });
+  });
+
+  // Ring circle resize
+  function updateRingCircle() {
+    var diamMm = parseFloat(ringSlider.value);
+    var diamPx = Math.round(diamMm * pxPerMm);
+    ringCircle.style.width = diamPx + 'px';
+    ringCircle.style.height = diamPx + 'px';
+    ringDiamLabel.textContent = diamMm.toFixed(1) + ' mm';
+  }
+  ringSlider.addEventListener('input', updateRingCircle);
+  updateRingCircle();
+
+  document.getElementById('measure-back').addEventListener('click', function () {
+    showStep(1);
+  });
+
+  // Find closest size
+  function findClosestByDiameter(diam) {
+    var closest = SIZES[0];
+    var minDiff = Math.abs(diam - closest.d);
+    var between = false;
+    for (var i = 1; i < SIZES.length; i++) {
+      var diff = Math.abs(diam - SIZES[i].d);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closest = SIZES[i];
+      }
+    }
+    if (minDiff > 0.15) between = true;
+    return { size: closest, between: between };
+  }
+
+  function findClosestByCircumference(circ) {
+    var closest = SIZES[0];
+    var minDiff = Math.abs(circ - closest.c);
+    var between = false;
+    for (var i = 1; i < SIZES.length; i++) {
+      var diff = Math.abs(circ - SIZES[i].c);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closest = SIZES[i];
+      }
+    }
+    if (minDiff > 0.5) between = true;
+    return { size: closest, between: between };
+  }
+
+  document.getElementById('find-size-btn').addEventListener('click', function () {
+    var result;
+    if (activeTab === 'ring') {
+      var diam = parseFloat(ringSlider.value);
+      result = findClosestByDiameter(diam);
+    } else {
+      var rawVal = parseFloat(circInput.value);
+      if (!rawVal || isNaN(rawVal)) {
+        circInput.focus();
+        return;
+      }
+      var unit = circUnit.value;
+      var circMm = rawVal;
+      if (unit === 'cm') circMm = rawVal * 10;
+      else if (unit === 'in') circMm = rawVal * 25.4;
+      result = findClosestByCircumference(circMm);
+    }
+
+    var s = result.size;
+    document.getElementById('result-us-size').textContent = 'US ' + s.us;
+    document.getElementById('res-us').textContent = s.us;
+    document.getElementById('res-uk').textContent = s.uk;
+    document.getElementById('res-eu').textContent = s.eu;
+    document.getElementById('res-jp').textContent = s.jp;
+    document.getElementById('res-dia').textContent = s.d.toFixed(1) + ' mm';
+    document.getElementById('res-circ').textContent = s.c.toFixed(1) + ' mm';
+
+    if (result.between) {
+      resultBetween.classList.remove('hidden');
+    } else {
+      resultBetween.classList.add('hidden');
+    }
+
+    showStep(3);
+  });
+
+  // Measure Again
+  document.getElementById('measure-again').addEventListener('click', function () {
+    showStep(1);
+  });
+
+  // Init
+  showStep(1);
+})();
+</script>

@@ -1,0 +1,129 @@
+---
+// ConversionTable.astro - Responsive ring size conversion table
+// Imports data from ring-sizes.json at build time
+
+import ringSizeData from '../data/ring-sizes.json';
+
+interface Props {
+  showSystems?: string[];
+  highlightRange?: { from: string; to: string };
+}
+
+const allSystems = ['diameter_mm', 'circumference_mm', 'us', 'uk', 'eu', 'jp'];
+const { showSystems = allSystems, highlightRange } = Astro.props;
+
+const columnLabels: Record<string, string> = {
+  diameter_mm: 'Diameter (mm)',
+  circumference_mm: 'Circumference (mm)',
+  us: 'US / Canada',
+  uk: 'UK / Australia',
+  eu: 'EU / ISO',
+  jp: 'Japan',
+};
+
+const fieldMap: Record<string, string> = {
+  diameter_mm: 'diameter_mm',
+  circumference_mm: 'circumference_mm',
+  us: 'us',
+  uk: 'uk',
+  eu: 'eu',
+  jp: 'jp',
+};
+
+const columns = showSystems.filter((s) => allSystems.includes(s));
+
+// Determine highlighted row range by US size
+let highlightFrom = -1;
+let highlightTo = -1;
+if (highlightRange) {
+  const fromVal = parseFloat(highlightRange.from);
+  const toVal = parseFloat(highlightRange.to);
+  ringSizeData.sizes.forEach((row: any, idx: number) => {
+    const usVal = parseFloat(row.us);
+    if (usVal >= fromVal && highlightFrom === -1) highlightFrom = idx;
+    if (usVal <= toVal) highlightTo = idx;
+  });
+}
+
+// Precompute row data for template
+interface CellData {
+  value: string;
+  isFirstCol: boolean;
+  isHighlighted: boolean;
+}
+
+interface RowData {
+  isHighlighted: boolean;
+  cells: CellData[];
+}
+
+const rows: RowData[] = ringSizeData.sizes.map((row: any, rowIdx: number) => {
+  const isHighlighted = highlightFrom !== -1 && rowIdx >= highlightFrom && rowIdx <= highlightTo;
+  const cells: CellData[] = columns.map((col, colIdx) => {
+    const rawValue = row[fieldMap[col]];
+    const displayValue =
+      col === 'diameter_mm' || col === 'circumference_mm'
+        ? Number(rawValue).toFixed(1)
+        : String(rawValue);
+    return {
+      value: displayValue,
+      isFirstCol: colIdx === 0,
+      isHighlighted,
+    };
+  });
+  return { isHighlighted, cells };
+});
+---
+
+<div class="overflow-x-auto rounded-xl border border-border shadow-sm">
+  <table class="w-full text-sm min-w-[500px]">
+    <thead>
+      <tr>
+        {columns.map((col, i) => (
+          <th
+            class:list={[
+              'sticky top-0 z-10 whitespace-nowrap',
+              i === 0 && 'sticky left-0 z-20',
+            ]}
+          >
+            {columnLabels[col]}
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row) => (
+        <tr class:list={[row.isHighlighted && 'ct-highlight-row']}>
+          {row.cells.map((cell) => (
+            <td
+              class:list={[
+                cell.isFirstCol && 'sticky left-0 bg-inherit font-medium',
+                cell.isHighlighted && '!bg-accent/10',
+              ]}
+            >
+              {cell.value}
+            </td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .ct-highlight-row td {
+    background-color: rgba(212, 175, 55, 0.1) !important;
+  }
+  /* Ensure sticky first column inherits correct bg on zebra rows */
+  tr:nth-child(even) td.sticky {
+    background-color: rgb(249, 250, 251);
+  }
+  .ct-highlight-row td.sticky {
+    background-color: rgba(212, 175, 55, 0.1) !important;
+  }
+  @media (max-width: 640px) {
+    .overflow-x-auto {
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+</style>

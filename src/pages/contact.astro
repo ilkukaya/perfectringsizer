@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BreadcrumbNav from '../components/BreadcrumbNav.astro';
+---
+
+<BaseLayout
+  title="Contact Us — PerfectRingSizer"
+  description="Get in touch with PerfectRingSizer for questions, feedback, or partnership inquiries."
+>
+  <section class="section-padding">
+    <div class="container-narrow">
+      <BreadcrumbNav items={[{ label: 'Contact Us', href: '/contact' }]} />
+
+      <h1 class="mb-6">Contact Us</h1>
+
+      <div class="prose max-w-none space-y-8 text-text-secondary leading-relaxed">
+        <p class="text-lg">
+          We'd love to hear from you! Whether you have a question about ring sizing, feedback on our tools, or a partnership inquiry, don't hesitate to reach out.
+        </p>
+
+        <div class="card">
+          <h2 class="text-xl md:text-2xl mb-4 text-primary">Email Us</h2>
+          <p>
+            The best way to reach us is by email:
+          </p>
+          <p class="mt-3">
+            <a href="mailto:contact@perfectringsizer.com" class="inline-flex items-center gap-2 text-lg font-semibold text-primary hover:text-primary-light underline underline-offset-4 transition-colors">
+              contact@perfectringsizer.com
+            </a>
+          </p>
+        </div>
+
+        <div class="card">
+          <h2 class="text-xl md:text-2xl mb-4 text-primary">What Can We Help With?</h2>
+          <ul class="space-y-4 mt-3">
+            <li class="flex items-start gap-3">
+              <span class="inline-block w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></span>
+              <div>
+                <strong class="text-text-primary">General Questions</strong>
+                <p class="mt-1">Questions about ring sizing, how to use our tools, or which sizing system to use.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="inline-block w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></span>
+              <div>
+                <strong class="text-text-primary">Tool Feedback</strong>
+                <p class="mt-1">Suggestions for improving our ring sizer tool, conversion charts, or printable resources.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="inline-block w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></span>
+              <div>
+                <strong class="text-text-primary">Partnership &amp; Affiliate Inquiries</strong>
+                <p class="mt-1">Interested in partnering with us? We're open to collaborations with jewelry brands and retailers.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="inline-block w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></span>
+              <div>
+                <strong class="text-text-primary">Bug Reports</strong>
+                <p class="mt-1">Found something that isn't working correctly? Let us know and we'll fix it as soon as possible.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card bg-gray-50">
+          <h2 class="text-xl md:text-2xl mb-4 text-primary">Response Time</h2>
+          <p>
+            We aim to respond to all inquiries within <strong>1-2 business days</strong>. During busy periods, it may take a little longer. We appreciate your patience and will get back to you as soon as we can.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl md:text-2xl mb-4 text-primary">Common Questions?</h2>
+          <p>
+            Before reaching out, you might find the answer you're looking for in our guides:
+          </p>
+          <div class="grid sm:grid-cols-2 gap-4 mt-4">
+            <a href="/ring-size-chart" class="card hover:border-primary hover:shadow-md transition-all group">
+              <h3 class="text-lg font-semibold text-primary group-hover:text-primary-light transition-colors">Ring Size Chart</h3>
+              <p class="text-sm text-text-muted mt-1">Complete US, UK, and EU ring size conversion charts.</p>
+            </a>
+            <a href="/how-to-measure-ring-size" class="card hover:border-primary hover:shadow-md transition-all group">
+              <h3 class="text-lg font-semibold text-primary group-hover:text-primary-light transition-colors">How to Measure</h3>
+              <p class="text-sm text-text-muted mt-1">Step-by-step guide to measuring your ring size at home.</p>
+            </a>
+            <a href="/ring-size-converter" class="card hover:border-primary hover:shadow-md transition-all group">
+              <h3 class="text-lg font-semibold text-primary group-hover:text-primary-light transition-colors">Ring Size Converter</h3>
+              <p class="text-sm text-text-muted mt-1">Convert ring sizes between different international systems.</p>
+            </a>
+            <a href="/printable-ring-sizer" class="card hover:border-primary hover:shadow-md transition-all group">
+              <h3 class="text-lg font-semibold text-primary group-hover:text-primary-light transition-colors">Printable Ring Sizer</h3>
+              <p class="text-sm text-text-muted mt-1">Download and print a ring sizer you can use at home.</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,273 @@
+---
+// SizeConverter.astro - Interactive ring size converter widget
+---
+
+<div id="size-converter" class="bg-surface rounded-xl border border-border p-6 md:p-8 shadow-md max-w-2xl mx-auto">
+  <h3 class="text-center mb-2">Ring Size Converter</h3>
+  <p class="text-text-secondary text-center text-sm mb-6">
+    Enter a ring size in any system and instantly see all equivalents.
+  </p>
+
+  <div class="flex gap-3 items-end mb-6">
+    <div class="w-44">
+      <label for="converter-system" class="block text-sm font-medium text-text-secondary mb-1">
+        Size System
+      </label>
+      <select
+        id="converter-system"
+        class="w-full px-3 py-2 border border-border rounded-lg bg-surface text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+      >
+        <option value="us">US / Canada</option>
+        <option value="uk">UK / Australia</option>
+        <option value="eu">EU / ISO</option>
+        <option value="jp">Japan</option>
+        <option value="diameter_mm">Diameter (mm)</option>
+        <option value="circumference_mm">Circumference (mm)</option>
+      </select>
+    </div>
+    <div class="flex-1">
+      <label for="converter-input" class="block text-sm font-medium text-text-secondary mb-1">
+        Size Value
+      </label>
+      <input
+        type="text"
+        id="converter-input"
+        placeholder="e.g. 7"
+        class="w-full px-3 py-2 border border-border rounded-lg bg-surface text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+      />
+    </div>
+  </div>
+
+  <!-- Results Grid -->
+  <div id="converter-results" class="hidden">
+    <div id="converter-between" class="text-sm text-accent font-medium text-center mb-4 hidden">
+      This value falls between standard sizes. Showing the closest match.
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
+      <div class="bg-background rounded-lg border border-border p-3 text-center">
+        <p class="text-xs text-text-muted mb-1">US / Canada</p>
+        <p id="conv-us" class="text-lg font-bold text-primary">-</p>
+      </div>
+      <div class="bg-background rounded-lg border border-border p-3 text-center">
+        <p class="text-xs text-text-muted mb-1">UK / Australia</p>
+        <p id="conv-uk" class="text-lg font-bold text-primary">-</p>
+      </div>
+      <div class="bg-background rounded-lg border border-border p-3 text-center">
+        <p class="text-xs text-text-muted mb-1">EU / ISO</p>
+        <p id="conv-eu" class="text-lg font-bold text-primary">-</p>
+      </div>
+      <div class="bg-background rounded-lg border border-border p-3 text-center">
+        <p class="text-xs text-text-muted mb-1">Japan</p>
+        <p id="conv-jp" class="text-lg font-bold text-primary">-</p>
+      </div>
+      <div class="bg-background rounded-lg border border-border p-3 text-center">
+        <p class="text-xs text-text-muted mb-1">Diameter</p>
+        <p id="conv-dia" class="text-lg font-bold text-primary">-</p>
+      </div>
+      <div class="bg-background rounded-lg border border-border p-3 text-center">
+        <p class="text-xs text-text-muted mb-1">Circumference</p>
+        <p id="conv-circ" class="text-lg font-bold text-primary">-</p>
+      </div>
+    </div>
+
+    <div class="flex justify-center">
+      <button
+        id="copy-all-btn"
+        class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-text-secondary border border-border rounded-lg hover:bg-gray-50 transition-colors"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+        <span id="copy-btn-text">Copy All Sizes</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="converter-empty" class="text-center text-text-muted text-sm py-8">
+    Enter a size above to see conversions.
+  </div>
+</div>
+
+<script>
+(function () {
+  var SIZES = [
+    { us:"1",uk:"B\u00bd",eu:"38",jp:"1",d:12.4,c:39.1 },
+    { us:"1.5",uk:"C\u00bd",eu:"40",jp:"2",d:12.8,c:40.4 },
+    { us:"2",uk:"D",eu:"41",jp:"2",d:13.2,c:41.7 },
+    { us:"2.5",uk:"E",eu:"42",jp:"3",d:13.6,c:42.9 },
+    { us:"3",uk:"F\u00bd",eu:"44",jp:"4",d:14.0,c:44.2 },
+    { us:"3.5",uk:"G\u00bd",eu:"45",jp:"5",d:14.4,c:45.5 },
+    { us:"4",uk:"H",eu:"47",jp:"7",d:14.9,c:46.8 },
+    { us:"4.5",uk:"I",eu:"48",jp:"8",d:15.3,c:48.0 },
+    { us:"5",uk:"J\u00bd",eu:"49",jp:"9",d:15.7,c:49.3 },
+    { us:"5.5",uk:"K\u00bd",eu:"50",jp:"10",d:16.1,c:50.6 },
+    { us:"6",uk:"L\u00bd",eu:"52",jp:"12",d:16.5,c:51.8 },
+    { us:"6.5",uk:"M\u00bd",eu:"53",jp:"13",d:16.9,c:53.1 },
+    { us:"7",uk:"N\u00bd",eu:"54",jp:"14",d:17.3,c:54.4 },
+    { us:"7.5",uk:"O\u00bd",eu:"56",jp:"15",d:17.7,c:55.7 },
+    { us:"8",uk:"P\u00bd",eu:"57",jp:"16",d:18.1,c:56.9 },
+    { us:"8.5",uk:"Q\u00bd",eu:"58",jp:"17",d:18.5,c:58.2 },
+    { us:"9",uk:"R\u00bd",eu:"59",jp:"19",d:19.0,c:59.5 },
+    { us:"9.5",uk:"S\u00bd",eu:"61",jp:"20",d:19.4,c:60.8 },
+    { us:"10",uk:"T\u00bd",eu:"62",jp:"21",d:19.8,c:62.1 },
+    { us:"10.5",uk:"U\u00bd",eu:"63",jp:"22",d:20.2,c:63.4 },
+    { us:"11",uk:"V\u00bd",eu:"65",jp:"23",d:20.6,c:64.6 },
+    { us:"11.5",uk:"W\u00bd",eu:"66",jp:"24",d:21.0,c:65.9 },
+    { us:"12",uk:"X\u00bd",eu:"67",jp:"25",d:21.4,c:67.2 },
+    { us:"12.5",uk:"Z",eu:"68",jp:"26",d:21.8,c:68.5 },
+    { us:"13",uk:"Z+1",eu:"69",jp:"27",d:22.2,c:69.7 },
+    { us:"13.5",uk:"Z+1.5",eu:"71",jp:"28",d:22.6,c:71.0 },
+    { us:"14",uk:"Z+2",eu:"72",jp:"29",d:23.0,c:72.3 },
+    { us:"14.5",uk:"Z+2.5",eu:"73",jp:"30",d:23.4,c:73.6 },
+    { us:"15",uk:"Z+3",eu:"74",jp:"31",d:23.8,c:74.8 },
+    { us:"15.5",uk:"Z+3.5",eu:"76",jp:"32",d:24.2,c:76.1 },
+    { us:"16",uk:"Z+4",eu:"77",jp:"33",d:24.6,c:77.4 }
+  ];
+
+  var systemSelect = document.getElementById('converter-system');
+  var inputField = document.getElementById('converter-input');
+  var resultsDiv = document.getElementById('converter-results');
+  var emptyDiv = document.getElementById('converter-empty');
+  var betweenNote = document.getElementById('converter-between');
+  var copyBtn = document.getElementById('copy-all-btn');
+  var copyBtnText = document.getElementById('copy-btn-text');
+
+  function findMatch(system, value) {
+    var val = value.trim();
+    if (!val) return null;
+
+    // For numeric systems, find closest
+    if (system === 'diameter_mm' || system === 'circumference_mm') {
+      var num = parseFloat(val);
+      if (isNaN(num)) return null;
+      var key = system === 'diameter_mm' ? 'd' : 'c';
+      var closest = SIZES[0];
+      var minDiff = Math.abs(num - closest[key]);
+      for (var i = 1; i < SIZES.length; i++) {
+        var diff = Math.abs(num - SIZES[i][key]);
+        if (diff < minDiff) {
+          minDiff = diff;
+          closest = SIZES[i];
+        }
+      }
+      var threshold = system === 'diameter_mm' ? 0.15 : 0.5;
+      return { size: closest, between: minDiff > threshold };
+    }
+
+    // For US/EU/JP, try exact match first, then closest numeric
+    var fieldMap = { us: 'us', uk: 'uk', eu: 'eu', jp: 'jp' };
+    var field = fieldMap[system];
+
+    // Exact match (case-insensitive for UK)
+    for (var i = 0; i < SIZES.length; i++) {
+      if (SIZES[i][field].toLowerCase() === val.toLowerCase()) {
+        return { size: SIZES[i], between: false };
+      }
+    }
+
+    // Numeric closest for US, EU, JP
+    if (system === 'us' || system === 'eu' || system === 'jp') {
+      var num = parseFloat(val);
+      if (isNaN(num)) return null;
+      var closest = SIZES[0];
+      var minDiff = Math.abs(num - parseFloat(closest[field]));
+      for (var i = 1; i < SIZES.length; i++) {
+        var diff = Math.abs(num - parseFloat(SIZES[i][field]));
+        if (diff < minDiff) {
+          minDiff = diff;
+          closest = SIZES[i];
+        }
+      }
+      return { size: closest, between: minDiff > 0.01 };
+    }
+
+    return null;
+  }
+
+  function updateResults() {
+    var system = systemSelect.value;
+    var value = inputField.value;
+    var result = findMatch(system, value);
+
+    if (!result) {
+      resultsDiv.classList.add('hidden');
+      emptyDiv.classList.remove('hidden');
+      return;
+    }
+
+    resultsDiv.classList.remove('hidden');
+    emptyDiv.classList.add('hidden');
+
+    var s = result.size;
+    document.getElementById('conv-us').textContent = s.us;
+    document.getElementById('conv-uk').textContent = s.uk;
+    document.getElementById('conv-eu').textContent = s.eu;
+    document.getElementById('conv-jp').textContent = s.jp;
+    document.getElementById('conv-dia').textContent = s.d.toFixed(1) + ' mm';
+    document.getElementById('conv-circ').textContent = s.c.toFixed(1) + ' mm';
+
+    if (result.between) {
+      betweenNote.classList.remove('hidden');
+    } else {
+      betweenNote.classList.add('hidden');
+    }
+
+    // Reset copy button text
+    copyBtnText.textContent = 'Copy All Sizes';
+  }
+
+  inputField.addEventListener('keyup', updateResults);
+  inputField.addEventListener('change', updateResults);
+  systemSelect.addEventListener('change', function () {
+    // Update placeholder based on system
+    var placeholders = {
+      us: 'e.g. 7',
+      uk: 'e.g. N\u00bd',
+      eu: 'e.g. 54',
+      jp: 'e.g. 14',
+      diameter_mm: 'e.g. 17.3',
+      circumference_mm: 'e.g. 54.4'
+    };
+    inputField.placeholder = placeholders[systemSelect.value] || '';
+    inputField.value = '';
+    resultsDiv.classList.add('hidden');
+    emptyDiv.classList.remove('hidden');
+  });
+
+  copyBtn.addEventListener('click', function () {
+    var us = document.getElementById('conv-us').textContent;
+    var uk = document.getElementById('conv-uk').textContent;
+    var eu = document.getElementById('conv-eu').textContent;
+    var jp = document.getElementById('conv-jp').textContent;
+    var dia = document.getElementById('conv-dia').textContent;
+    var circ = document.getElementById('conv-circ').textContent;
+
+    var text = 'Ring Size:\n' +
+      'US/Canada: ' + us + '\n' +
+      'UK/Australia: ' + uk + '\n' +
+      'EU/ISO: ' + eu + '\n' +
+      'Japan: ' + jp + '\n' +
+      'Diameter: ' + dia + '\n' +
+      'Circumference: ' + circ;
+
+    navigator.clipboard.writeText(text).then(function () {
+      copyBtnText.textContent = 'Copied!';
+      setTimeout(function () {
+        copyBtnText.textContent = 'Copy All Sizes';
+      }, 2000);
+    }).catch(function () {
+      // Fallback
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      copyBtnText.textContent = 'Copied!';
+      setTimeout(function () {
+        copyBtnText.textContent = 'Copy All Sizes';
+      }, 2000);
+    });
+  });
+})();
+</script>

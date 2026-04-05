@@ -1,0 +1,45 @@
+---
+interface Props {
+  name: string;
+  url: string;
+  description: string;
+  cta: string;
+  features: string[];
+  bestFor: string;
+}
+
+const { name, url, description, cta, features, bestFor } = Astro.props;
+---
+
+<div class="relative bg-[#FFFFFF] border border-[#E5E5E0] rounded-xl shadow-sm hover:shadow-md transition-shadow p-6">
+  {/* Best-for badge */}
+  <span class="absolute top-4 right-4 inline-block bg-[#D4AF37]/15 text-[#D4AF37] text-xs font-semibold px-3 py-1 rounded-full border border-[#D4AF37]/30">
+    {bestFor}
+  </span>
+
+  {/* Name */}
+  <h3 class="text-xl font-bold text-[#1B4D3E] mt-1 mb-2 pr-36">{name}</h3>
+
+  {/* Description */}
+  <p class="text-gray-600 text-sm leading-relaxed mb-4">{description}</p>
+
+  {/* Features list */}
+  <ul class="space-y-1.5 mb-6">
+    {features.map((feature) => (
+      <li class="flex items-center gap-2 text-sm text-gray-700">
+        <span class="text-[#2D7A5F] font-bold flex-shrink-0">✓</span>
+        {feature}
+      </li>
+    ))}
+  </ul>
+
+  {/* CTA button */}
+  <a
+    href={url}
+    target="_blank"
+    rel="noopener nofollow sponsored"
+    class="inline-block w-full text-center bg-[#D4AF37] hover:bg-[#c9a430] text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+  >
+    {cta}
+  </a>
+</div>

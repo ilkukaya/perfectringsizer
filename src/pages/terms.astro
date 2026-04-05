@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BreadcrumbNav from '../components/BreadcrumbNav.astro';
+---
+
+<BaseLayout
+  title="Terms of Service — PerfectRingSizer"
+  description="Terms of service for using PerfectRingSizer ring sizing tools and website."
+>
+  <section class="section-padding">
+    <div class="container-narrow">
+      <BreadcrumbNav items={[{ label: 'Terms of Service', href: '/terms' }]} />
+
+      <h1 class="mb-4">Terms of Service</h1>
+      <p class="text-text-muted mb-8">Last updated: April 2026</p>
+
+      <div class="prose max-w-none space-y-8 text-text-secondary leading-relaxed">
+        <div>
+          <h2 class="text-xl md:text-2xl mb-3 text-primary">1. Acceptance of Terms</h2>
+          <p>
+            By accessing and using PerfectRingSizer ("the Website"), you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, please do not use our website or tools.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl md:text-2xl mb-3 text-primary">2. Use of Tools</h2>
+          <p>
+            PerfectRingSizer provides online ring sizing tools, printable sizers, conversion charts, and related guides for informational and educational purposes.
+          </p>
+          <div class="card bg-amber-50 border-amber-200 mt-4">
+            <p class="font-semibold text-amber-800 mb-2">Accuracy Disclaimer</p>
+            <p class="text-amber-900">
+              Our tools are designed to provide helpful estimates and guidance, but they are not a substitute for professional measurement. Ring sizes can vary based on finger shape, temperature, time of day, and other factors. <strong>For high-value purchases such as engagement rings, we strongly recommend confirming your size with a professional jeweler.</strong>
+            </p>
+          </div>
+          <p class="mt-4">
+            You agree to use our tools responsibly and understand that results are approximate guides rather than guaranteed measurements.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl md:text-2xl mb-3 text-primary">3. Affiliate Links Disclosure</h2>
+          <p>
+            PerfectRingSizer contains affiliate links to third-party retailers. When you click on these links and make a purchase, we may earn a commission at no additional cost to you. Affiliate partnerships do not influence our sizing data, tool accuracy, or editorial content. We clearly identify affiliate links where applicable.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl md:text-2xl mb-3 text-primary">4. Intellectual Property</h2>
+          <p>
+            All content on PerfectRingSizer — including text, graphics, logos, tools, software, and design — is the property of PerfectRingSizer and is protected by applicable intellectual property laws. You may not reproduce, distribute, modify, or create derivative works from our content without prior written permission.
+          </p>
+          <p class="mt-3">
+            You are permitted to use our printable ring sizers and charts for personal, non-commercial purposes.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl md:text-2xl mb-3 text-primary">5. Limitation of Liability</h2>
+          <p>
+            To the fullest extent permitted by law, PerfectRingSizer and its operators shall not be liable for any direct, indirect, incidental, consequential, or special damages arising from your use of the website or reliance on our tools, including but not limited to:
+          </p>
+          <ul class="list-disc list-inside space-y-1 mt-3">
+            <li>Incorrect ring size measurements or purchases made based on our tools</li>
+            <li>Any loss or damage resulting from the use of third-party websites accessed through our affiliate links</li>
+            <li>Service interruptions, errors, or technical issues</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-xl md:text-2xl mb-3 text-primary">6. Disclaimer of Warranties</h2>
+          <p>
+            PerfectRingSizer is provided on an "as is" and "as available" basis without warranties of any kind, either express or implied. We do not warrant that the website will be uninterrupted, error-free, or that the results obtained from our tools will be accurate or reliable for all circumstances.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl md:text-2xl mb-3 text-primary">7. Governing Law</h2>
+          <p>
+            These Terms of Service shall be governed by and construed in accordance with applicable laws. Any disputes arising from the use of this website shall be resolved through appropriate legal channels in the jurisdiction where PerfectRingSizer operates.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl md:text-2xl mb-3 text-primary">8. Changes to Terms</h2>
+          <p>
+            We reserve the right to modify these Terms of Service at any time. Changes will be posted on this page with an updated "Last updated" date. Your continued use of the website after changes are posted constitutes acceptance of the revised terms.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-xl md:text-2xl mb-3 text-primary">9. Contact</h2>
+          <p>
+            If you have any questions about these Terms of Service, please reach out through our <a href="/contact" class="text-primary hover:text-primary-light underline underline-offset-2">Contact page</a> or email us at <a href="mailto:contact@perfectringsizer.com" class="text-primary hover:text-primary-light underline underline-offset-2">contact@perfectringsizer.com</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

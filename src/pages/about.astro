@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BreadcrumbNav from '../components/BreadcrumbNav.astro';
+---
+
+<BaseLayout
+  title="About PerfectRingSizer — Free Ring Sizing Tools"
+  description="Learn about PerfectRingSizer, our mission to help you find the perfect ring size with free, accurate online tools."
+>
+  <section class="section-padding">
+    <div class="container-narrow">
+      <BreadcrumbNav items={[{ label: 'About', href: '/about' }]} />
+
+      <h1 class="mb-6">About PerfectRingSizer</h1>
+
+      <div class="prose max-w-none space-y-8 text-text-secondary leading-relaxed">
+        <div class="card">
+          <h2 class="text-xl md:text-2xl mb-4 text-primary">Our Mission</h2>
+          <p>
+            PerfectRingSizer was created with a simple goal: to help people find their accurate ring size from the comfort of home. Whether you're shopping for an engagement ring, a wedding band, or a gift for someone special, getting the right size matters. We provide free, reliable tools so you can measure with confidence — no jeweler visit required.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2 class="text-xl md:text-2xl mb-4 text-primary">What We Offer</h2>
+          <ul class="list-disc list-inside space-y-2 mt-3">
+            <li><strong>Online Ring Sizer Tool</strong> — An interactive, screen-calibrated tool that helps you determine your ring size in real time.</li>
+            <li><strong>Printable Ring Sizer</strong> — A downloadable PDF you can print at home for a hands-on sizing experience.</li>
+            <li><strong>Ring Size Conversion Charts</strong> — Comprehensive charts covering US, UK, EU, and international sizing systems.</li>
+            <li><strong>Brand-Specific Guides</strong> — Sizing advice tailored to popular jewelry brands so you can shop with confidence.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2 class="text-xl md:text-2xl mb-4 text-primary">Our Standards</h2>
+          <p>
+            Accuracy is everything when it comes to ring sizing. Our tools and conversion charts are based on <strong>ISO 8653:2016</strong>, the international standard for ring sizes. This ensures that the measurements and conversions we provide are consistent with industry practices worldwide.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2 class="text-xl md:text-2xl mb-4 text-primary">How Our Tools Work</h2>
+          <p>
+            Our online ring sizer uses screen calibration to ensure that on-screen measurements match real-world dimensions. By using a reference object — such as a credit card or coin — we adjust for your specific display so the virtual ring circles are true to size. Our conversion engine then maps your measurement to standardized ring sizes across all major systems.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2 class="text-xl md:text-2xl mb-4 text-primary">Why Trust PerfectRingSizer?</h2>
+          <ul class="list-disc list-inside space-y-2 mt-3">
+            <li><strong>Completely free</strong> — All tools and guides are available at no cost, with no hidden fees.</li>
+            <li><strong>No account needed</strong> — Use our tools instantly without signing up or providing personal information.</li>
+            <li><strong>Privacy-first</strong> — We don't collect personal data. Your measurements stay on your device. Read our <a href="/privacy-policy" class="text-primary hover:text-primary-light underline underline-offset-2">Privacy Policy</a> for details.</li>
+            <li><strong>Standards-based</strong> — Our data is grounded in ISO 8653:2016 for reliable, industry-recognized results.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2 class="text-xl md:text-2xl mb-4 text-primary">Get in Touch</h2>
+          <p>
+            Have questions, feedback, or partnership inquiries? We'd love to hear from you. Visit our <a href="/contact" class="text-primary hover:text-primary-light underline underline-offset-2">Contact page</a> to get in touch.
+          </p>
+        </div>
+
+        <div class="card bg-gray-50">
+          <h2 class="text-xl md:text-2xl mb-4 text-primary">Affiliate Disclosure</h2>
+          <p>
+            PerfectRingSizer participates in affiliate programs with select jewelry retailers. This means we may earn a small commission when you click on certain links and make a purchase — at no additional cost to you. These partnerships help us keep our tools free and our content up to date. Our recommendations and sizing data are never influenced by affiliate relationships. We only partner with reputable brands that meet our quality standards.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

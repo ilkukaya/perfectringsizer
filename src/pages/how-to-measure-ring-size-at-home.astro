@@ -1,0 +1,360 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ConversionTable from '../components/ConversionTable.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+import AffiliateCTA from '../components/AffiliateCTA.astro';
+import PrintableDownload from '../components/PrintableDownload.astro';
+import BreadcrumbNav from '../components/BreadcrumbNav.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { generateHowToSchema, generateFAQSchema, generateBreadcrumbSchema } from '../utils/schemaGenerators';
+
+const faqs = [
+  { question: "Is the string method accurate for measuring ring size?", answer: "Yes, the string method is accurate to within approximately half a ring size when done correctly. For the best results, use a non-stretchy string like dental floss, measure at room temperature in the evening, and repeat the measurement 2-3 times to ensure consistency. If you get slightly different results each time, choose the larger measurement." },
+  { question: "What time of day is best to measure ring size?", answer: "The best time to measure your ring size is in the evening, when your fingers are at their largest. Fingers naturally swell throughout the day due to increased blood flow and activity. Avoid measuring first thing in the morning when fingers are at their smallest, or immediately after exercise when they may be temporarily swollen." },
+  { question: "How tight should the string be when measuring?", answer: "The string should be snug around your finger but not tight. You should be able to slide it over your knuckle with slight resistance — similar to how a well-fitting ring feels. If the string leaves an indentation on your skin, it's too tight. If it moves freely without any resistance, it's too loose." },
+  { question: "My knuckle is bigger than my finger base — what size should I choose?", answer: "If your knuckle is significantly larger than the base of your finger, measure both areas and choose a size between the two measurements. The ring needs to fit over your knuckle but shouldn't spin freely on your finger. Many people in this situation benefit from sizing up by a quarter to half size from their finger base measurement." },
+  { question: "Can I measure my ring size with a tape measure?", answer: "Yes, you can use a flexible tape measure to measure the circumference of your finger in millimeters. Wrap it around the base of your finger where the ring will sit, note the circumference, and use a ring size conversion chart to find your size. Make sure the tape measure is snug but not tight." },
+  { question: "Is there an app for measuring ring size?", answer: "While there are ring sizing apps available, our free online ring sizer tool works directly in your browser without any download. It uses screen calibration technology with a credit card reference to provide accurate measurements. Simply visit our homepage to use the tool — it works on any device with a screen." }
+];
+
+const howToSteps = [
+  { name: "String or Dental Floss Method", text: "Wrap a piece of non-stretchy string around the base of your finger, mark where it overlaps, and measure the length against a ruler to find your circumference." },
+  { name: "Paper Strip Method", text: "Cut a thin strip of paper, wrap it around your finger, mark the overlap point, and measure the length in millimeters." },
+  { name: "Existing Ring Method", text: "Place a ring that fits well on a ruler and measure the inside diameter in millimeters." },
+  { name: "Online Ring Sizer Tool", text: "Use our free online ring sizer with screen calibration technology for instant, accurate results on any device." },
+  { name: "Printable Ring Sizer", text: "Download and print our free PDF ring sizer strip, cut it out, and wrap it around your finger to read your size directly." }
+];
+
+const breadcrumbs = [
+  { name: "Home", url: "/" },
+  { name: "How to Measure Ring Size at Home", url: "/how-to-measure-ring-size-at-home" }
+];
+
+const howToSchema = generateHowToSchema("How to Measure Ring Size at Home", howToSteps);
+const faqSchema = generateFAQSchema(faqs);
+const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
+---
+
+<BaseLayout
+  title="How to Measure Ring Size at Home — 5 Easy Methods (2026 Guide)"
+  description="Learn 5 accurate methods to measure ring size at home. Step-by-step guide with string, paper, and online tools. Free and works without visiting a jeweler."
+>
+  <div class="container-narrow section-padding">
+    <BreadcrumbNav items={[{ label: "Home", href: "/" }, { label: "How to Measure Ring Size at Home", href: "/how-to-measure-ring-size-at-home" }]} />
+
+    <article>
+      <header class="mb-10">
+        <h1 class="mb-4">How to Measure Ring Size at Home: 5 Accurate Methods</h1>
+        <p class="text-text-muted text-sm">Last updated: April 2026</p>
+      </header>
+
+      <!-- Introduction -->
+      <section class="mb-12">
+        <p class="text-lg text-text-secondary mb-4">
+          Finding the right ring size is one of the most important steps when buying a ring — whether it's an engagement ring, wedding band, or a treat for yourself. A ring that's too tight will be uncomfortable and difficult to remove, while one that's too loose risks slipping off and getting lost. The good news? You don't need to visit a jeweler to get an accurate measurement.
+        </p>
+        <p class="text-text-secondary mb-4">
+          With a few simple household items and the right technique, you can determine your ring size from the comfort of your home. The methods below are based on measuring either the inner diameter or the circumference of your finger, which can then be converted to standard ring sizes using international sizing charts. Our methods align with the ISO 8653:2016 standard used by jewelers worldwide.
+        </p>
+        <p class="text-text-secondary mb-4">
+          Each method has its strengths, and we recommend trying at least two different approaches to confirm your measurement. If you're buying an expensive ring or have an unusual finger shape (such as large knuckles with a thin finger base), consider visiting a professional jeweler for a final confirmation. Most jewelers offer free ring sizing — it only takes a minute.
+        </p>
+        <p class="text-text-secondary">
+          Below, we walk you through five proven methods, share pro tips for the most accurate results, and highlight common mistakes to avoid. Let's find your perfect fit.
+        </p>
+      </section>
+
+      <!-- Method 1: String Method -->
+      <section class="mb-12" id="string-method">
+        <h2 class="mb-6">Method 1: String or Dental Floss Method</h2>
+        <p class="text-text-secondary mb-4">
+          The string method is the most popular DIY ring sizing technique. It's quick, free, and uses items you likely already have at home. This method measures your finger's circumference, which can then be converted to a standard ring size.
+        </p>
+
+        <div class="card mb-6">
+          <h3 class="text-lg font-semibold mb-3">What You Need</h3>
+          <ul class="list-disc list-inside text-text-secondary space-y-1">
+            <li>A piece of non-stretchy string, dental floss, or thin ribbon (about 6 inches / 15cm)</li>
+            <li>A ruler with millimeter markings</li>
+            <li>A pen or marker</li>
+            <li>Scissors (optional, for trimming)</li>
+          </ul>
+        </div>
+
+        <h3 class="text-lg font-semibold mb-3">Step-by-Step Instructions</h3>
+        <ol class="list-decimal list-inside space-y-3 text-text-secondary mb-6">
+          <li><strong>Prepare the string.</strong> Cut a piece of non-stretchy string or dental floss approximately 6 inches (15 cm) long. Avoid elastic, yarn, or anything that could stretch — this will give inaccurate results.</li>
+          <li><strong>Wrap around your finger.</strong> Wrap the string around the base of the finger you want to measure — this is where the ring will sit. For most rings, this is at the widest part between your knuckle and the base of your finger.</li>
+          <li><strong>Ensure proper fit.</strong> The string should be snug but comfortable. It should slide over your knuckle with slight resistance but not cut into your skin. Think about how you'd want a ring to feel — secure but not tight.</li>
+          <li><strong>Mark the overlap.</strong> Using the pen, mark the exact point where the string overlaps or meets itself. Be as precise as possible — even a millimeter off can affect your result.</li>
+          <li><strong>Measure the length.</strong> Lay the string flat against a ruler and measure from the end to the mark in millimeters. This measurement is your finger circumference.</li>
+          <li><strong>Find your size.</strong> Use our <a href="/ring-size-chart" class="text-primary hover:text-primary-light underline">ring size chart</a> or <a href="/ring-size-converter" class="text-primary hover:text-primary-light underline">size converter tool</a> to convert your circumference measurement to a standard ring size.</li>
+        </ol>
+
+        <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+          <p class="text-sm text-green-800"><strong>Pro Tip:</strong> Measure 2-3 times and take the average. If your measurements vary, choose the larger size — it's easier to resize a ring down than up.</p>
+        </div>
+      </section>
+
+      <!-- Method 2: Paper Strip -->
+      <section class="mb-12" id="paper-method">
+        <h2 class="mb-6">Method 2: Paper Strip Method</h2>
+        <p class="text-text-secondary mb-4">
+          Similar to the string method, but uses a strip of paper instead. Paper is easier to mark accurately and doesn't stretch, making it a reliable alternative. Many people find paper easier to work with than string.
+        </p>
+
+        <div class="card mb-6">
+          <h3 class="text-lg font-semibold mb-3">What You Need</h3>
+          <ul class="list-disc list-inside text-text-secondary space-y-1">
+            <li>A strip of paper (about 1cm wide, 10cm long) — regular printer paper works fine</li>
+            <li>A ruler with millimeter markings</li>
+            <li>A pen</li>
+          </ul>
+        </div>
+
+        <h3 class="text-lg font-semibold mb-3">Step-by-Step Instructions</h3>
+        <ol class="list-decimal list-inside space-y-3 text-text-secondary mb-6">
+          <li><strong>Cut a paper strip.</strong> Cut a strip of paper approximately 1 cm (½ inch) wide and 10 cm (4 inches) long. Standard printer or notebook paper works well.</li>
+          <li><strong>Wrap it around your finger.</strong> Wrap the strip around the base of your finger where the ring will sit. Make sure it's flat and not twisted.</li>
+          <li><strong>Mark the overlap point.</strong> Where the paper overlaps, mark both the top and bottom layers with a pen line. This ensures precision.</li>
+          <li><strong>Measure the distance.</strong> Unfold the paper and measure the distance between the starting edge and your mark in millimeters. This is your finger circumference.</li>
+          <li><strong>Convert to ring size.</strong> Use our <a href="/ring-size-converter" class="text-primary hover:text-primary-light underline">converter tool</a> to find your ring size from the circumference measurement.</li>
+        </ol>
+
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <p class="text-sm text-blue-800"><strong>String vs. Paper:</strong> Both methods measure circumference and give equivalent results. Paper is slightly easier to mark accurately, while string conforms better to irregular finger shapes. Try both and compare.</p>
+        </div>
+      </section>
+
+      <!-- Method 3: Existing Ring -->
+      <section class="mb-12" id="existing-ring-method">
+        <h2 class="mb-6">Method 3: Existing Ring Method</h2>
+        <p class="text-text-secondary mb-4">
+          If you already have a ring that fits the correct finger well, this is the fastest and most accurate home method. You simply measure the ring's inner diameter and convert it to a standard size.
+        </p>
+
+        <div class="card mb-6">
+          <h3 class="text-lg font-semibold mb-3">What You Need</h3>
+          <ul class="list-disc list-inside text-text-secondary space-y-1">
+            <li>A ring that fits well on the intended finger</li>
+            <li>A ruler with millimeter markings (or our online tool)</li>
+          </ul>
+        </div>
+
+        <h3 class="text-lg font-semibold mb-3">Option A: Measure with a Ruler</h3>
+        <ol class="list-decimal list-inside space-y-3 text-text-secondary mb-6">
+          <li>Place the ring flat on a table.</li>
+          <li>Position a ruler across the center of the ring opening.</li>
+          <li>Measure the inside diameter (from inner edge to inner edge) in millimeters.</li>
+          <li>Use our <a href="/ring-size-chart" class="text-primary hover:text-primary-light underline">size chart</a> to find the corresponding ring size.</li>
+        </ol>
+
+        <h3 class="text-lg font-semibold mb-3">Option B: Use Our Online Tool</h3>
+        <p class="text-text-secondary mb-4">
+          Place the ring on your screen and use our <a href="/#ring-sizer-tool" class="text-primary hover:text-primary-light underline">online ring sizer tool</a>. After calibrating your screen with a credit card, adjust the on-screen circle to match your ring's inner diameter. The tool instantly shows your size in all international systems.
+        </p>
+
+        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+          <p class="text-sm text-yellow-800"><strong>Important:</strong> Make sure you measure the <em>inside</em> diameter of the ring, not the outside. The ring's metal thickness can add 1-2mm, which would give you a size too large.</p>
+        </div>
+      </section>
+
+      <!-- Method 4: Online Tool -->
+      <section class="mb-12" id="online-tool-method">
+        <h2 class="mb-6">Method 4: Our Free Online Ring Sizer Tool</h2>
+        <p class="text-text-secondary mb-4">
+          Our online ring sizer is the most convenient option — no supplies needed, just your device's screen and a credit card for calibration. The tool works on phones, tablets, and desktop computers.
+        </p>
+
+        <h3 class="text-lg font-semibold mb-3">How It Works</h3>
+        <ol class="list-decimal list-inside space-y-3 text-text-secondary mb-6">
+          <li><strong>Calibrate your screen.</strong> Place a standard credit card (ISO 7810 ID-1, 85.6mm × 53.98mm) on your screen and adjust the on-screen rectangle to match exactly. This establishes the pixel-to-millimeter ratio for your specific screen.</li>
+          <li><strong>Measure your ring or finger.</strong> Place an existing ring on the screen and match the on-screen circle to its inner diameter, or enter your finger circumference manually.</li>
+          <li><strong>Get instant results.</strong> Your ring size appears immediately in US, UK, EU, Japanese, and metric formats.</li>
+        </ol>
+
+        <div class="text-center my-8">
+          <a href="/#ring-sizer-tool" class="btn-primary text-lg">
+            Try the Free Online Ring Sizer →
+          </a>
+        </div>
+      </section>
+
+      <!-- Method 5: Printable Sizer -->
+      <section class="mb-12" id="printable-method">
+        <h2 class="mb-6">Method 5: Printable Ring Sizer</h2>
+        <p class="text-text-secondary mb-6">
+          Our printable ring sizer is a free PDF that you can download, print, and use as a physical measuring strip. It includes both a finger wrap strip and ring placement circles for measuring existing rings.
+        </p>
+
+        <PrintableDownload />
+      </section>
+
+      <!-- Pro Tips -->
+      <section class="mb-12" id="pro-tips">
+        <h2 class="mb-6">Pro Tips for Accurate Ring Size Measurement</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="card">
+            <h3 class="font-semibold mb-2">🕐 Measure in the Evening</h3>
+            <p class="text-text-secondary text-sm">Fingers are smallest in the morning and swell throughout the day. Evening measurements give the most reliable fit for daily wear.</p>
+          </div>
+          <div class="card">
+            <h3 class="font-semibold mb-2">🌡️ Room Temperature Matters</h3>
+            <p class="text-text-secondary text-sm">Cold fingers shrink, hot fingers swell. Measure when your hands are at a comfortable room temperature for the most accurate result.</p>
+          </div>
+          <div class="card">
+            <h3 class="font-semibold mb-2">🔄 Measure Multiple Times</h3>
+            <p class="text-text-secondary text-sm">Take at least 2-3 measurements across different times of day. Consistency confirms accuracy. If results vary, choose the larger size.</p>
+          </div>
+          <div class="card">
+            <h3 class="font-semibold mb-2">🤚 Consider Your Knuckle</h3>
+            <p class="text-text-secondary text-sm">If your knuckle is larger than your finger base, size for the knuckle. The ring needs to slide over it comfortably.</p>
+          </div>
+          <div class="card">
+            <h3 class="font-semibold mb-2">📏 Wide Bands Need More Room</h3>
+            <p class="text-text-secondary text-sm">Rings wider than 6mm typically need a half size larger than your measured size. Wide bands contact more skin and feel tighter.</p>
+          </div>
+          <div class="card">
+            <h3 class="font-semibold mb-2">🏃 Skip Post-Exercise</h3>
+            <p class="text-text-secondary text-sm">Don't measure right after exercise, a hot shower, or consuming salty food. These temporarily swell your fingers and give misleading results.</p>
+          </div>
+          <div class="card">
+            <h3 class="font-semibold mb-2">✋ Dominant Hand Is Bigger</h3>
+            <p class="text-text-secondary text-sm">Your dominant hand is typically a quarter to half size larger than your non-dominant hand. Measure the specific finger you plan to wear the ring on.</p>
+          </div>
+          <div class="card">
+            <h3 class="font-semibold mb-2">👌 The Comfort Test</h3>
+            <p class="text-text-secondary text-sm">A well-fitting ring slides on with slight resistance over the knuckle and sits comfortably at the base without spinning or feeling tight.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Common Mistakes -->
+      <section class="mb-12" id="common-mistakes">
+        <h2 class="mb-6">Common Mistakes to Avoid</h2>
+        <div class="space-y-4">
+          <div class="flex gap-3 items-start">
+            <span class="text-red-500 font-bold text-lg">✗</span>
+            <div>
+              <h3 class="font-semibold">Measuring in the morning</h3>
+              <p class="text-text-secondary text-sm">Your fingers are at their smallest in the morning. A ring sized in the morning may be too tight by evening.</p>
+            </div>
+          </div>
+          <div class="flex gap-3 items-start">
+            <span class="text-red-500 font-bold text-lg">✗</span>
+            <div>
+              <h3 class="font-semibold">Using stretchy material</h3>
+              <p class="text-text-secondary text-sm">Elastic string, yarn, or rubber bands stretch when wrapped around your finger, giving a measurement that's too small.</p>
+            </div>
+          </div>
+          <div class="flex gap-3 items-start">
+            <span class="text-red-500 font-bold text-lg">✗</span>
+            <div>
+              <h3 class="font-semibold">Wrapping too tight or too loose</h3>
+              <p class="text-text-secondary text-sm">Too tight means a ring you can't get off; too loose means one that falls off. Aim for snug with slight resistance.</p>
+            </div>
+          </div>
+          <div class="flex gap-3 items-start">
+            <span class="text-red-500 font-bold text-lg">✗</span>
+            <div>
+              <h3 class="font-semibold">Ignoring the knuckle</h3>
+              <p class="text-text-secondary text-sm">Your ring needs to pass over your knuckle every time. If your knuckle is significantly larger, factor that into your sizing.</p>
+            </div>
+          </div>
+          <div class="flex gap-3 items-start">
+            <span class="text-red-500 font-bold text-lg">✗</span>
+            <div>
+              <h3 class="font-semibold">Measuring cold fingers</h3>
+              <p class="text-text-secondary text-sm">Cold temperatures cause fingers to shrink. Wait until your hands are at a normal temperature before measuring.</p>
+            </div>
+          </div>
+          <div class="flex gap-3 items-start">
+            <span class="text-red-500 font-bold text-lg">✗</span>
+            <div>
+              <h3 class="font-semibold">Only measuring once</h3>
+              <p class="text-text-secondary text-sm">A single measurement can be off. Always measure at least 2-3 times, ideally at different times of day, and use the average.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- When to Visit a Jeweler -->
+      <section class="mb-12" id="visit-jeweler">
+        <h2 class="mb-6">When to Visit a Jeweler</h2>
+        <p class="text-text-secondary mb-4">
+          While home methods are reliable for most people, some situations call for professional measurement:
+        </p>
+        <ul class="list-disc list-inside text-text-secondary space-y-2 mb-4">
+          <li><strong>Large knuckles with thin fingers:</strong> A jeweler can help find the right balance between passing over the knuckle and fitting the finger base.</li>
+          <li><strong>High-value purchases:</strong> For expensive engagement rings or heirloom pieces, a professional fitting provides extra confidence.</li>
+          <li><strong>Inconsistent home measurements:</strong> If you're getting different sizes each time, a jeweler's ring mandrel gives a definitive answer.</li>
+          <li><strong>Unusual ring styles:</strong> Tension settings, eternity bands, and other special designs may have unique sizing needs.</li>
+          <li><strong>First-time ring buyers:</strong> If you've never worn a ring before, trying on actual rings at a jeweler helps you understand what "comfortable" feels like.</li>
+        </ul>
+        <p class="text-text-secondary">
+          Most jewelry stores offer free ring sizing — walk in and ask. It takes about a minute and you'll leave with confidence in your size.
+        </p>
+      </section>
+
+      <!-- Quick Reference Table -->
+      <section class="mb-12" id="size-chart">
+        <SectionHeading title="Quick Size Reference Table" subtitle="Common ring sizes across international standards" />
+        <div class="mt-6 overflow-x-auto">
+          <ConversionTable />
+        </div>
+        <p class="text-center mt-4">
+          <a href="/ring-size-chart" class="text-primary hover:text-primary-light underline">View Complete Ring Size Chart →</a>
+        </p>
+      </section>
+
+      <!-- Affiliate CTA -->
+      <section class="mb-12">
+        <AffiliateCTA text="Now that you know your size, find your perfect ring at trusted online jewelers →" />
+      </section>
+
+      <!-- FAQ -->
+      <section class="mb-12" id="faq">
+        <SectionHeading title="Frequently Asked Questions" />
+        <div class="mt-6">
+          <FAQAccordion faqs={faqs} />
+        </div>
+      </section>
+
+      <!-- Related Guides -->
+      <section class="mb-12">
+        <h2 class="mb-6">Related Guides</h2>
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <a href="/how-to-measure-ring-size-with-string" class="card hover:border-primary transition-colors">
+            <h3 class="font-semibold text-primary">String Method Guide</h3>
+            <p class="text-text-secondary text-sm mt-1">Detailed guide for the string/floss method</p>
+          </a>
+          <a href="/how-to-measure-ring-size-with-paper" class="card hover:border-primary transition-colors">
+            <h3 class="font-semibold text-primary">Paper Method Guide</h3>
+            <p class="text-text-secondary text-sm mt-1">Step-by-step paper strip instructions</p>
+          </a>
+          <a href="/how-to-measure-ring-size-without-ring" class="card hover:border-primary transition-colors">
+            <h3 class="font-semibold text-primary">Without a Ring</h3>
+            <p class="text-text-secondary text-sm mt-1">Methods when you don't have a ring to measure</p>
+          </a>
+          <a href="/what-ring-size-am-i" class="card hover:border-primary transition-colors">
+            <h3 class="font-semibold text-primary">What Ring Size Am I?</h3>
+            <p class="text-text-secondary text-sm mt-1">Quick interactive size finder</p>
+          </a>
+          <a href="/printable-ring-sizer" class="card hover:border-primary transition-colors">
+            <h3 class="font-semibold text-primary">Printable Ring Sizer</h3>
+            <p class="text-text-secondary text-sm mt-1">Download our free PDF sizer</p>
+          </a>
+          <a href="/ring-size-chart" class="card hover:border-primary transition-colors">
+            <h3 class="font-semibold text-primary">Ring Size Chart</h3>
+            <p class="text-text-secondary text-sm mt-1">Complete international conversion table</p>
+          </a>
+        </div>
+      </section>
+    </article>
+  </div>
+
+  <!-- Schema Markup -->
+  <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+</BaseLayout>

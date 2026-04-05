@@ -1,0 +1,270 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RingSizerTool from '../components/RingSizerTool.astro';
+import SizeConverter from '../components/SizeConverter.astro';
+import ConversionTable from '../components/ConversionTable.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+import AffiliateCard from '../components/AffiliateCard.astro';
+import PrintableDownload from '../components/PrintableDownload.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import affiliates from '../data/affiliates.json';
+import { generateWebApplicationSchema, generateFAQSchema, generateOrganizationSchema } from '../utils/schemaGenerators';
+
+const title = "Perfect Ring Sizer — Free Online Ring Size Measurement Tool";
+const description = "Measure your ring size accurately at home with our free online tool. Instant US, UK, EU size conversion. Works on any device — no app needed.";
+
+const faqs = [
+  {
+    question: "How accurate is this online ring sizer?",
+    answer: "Our tool uses screen calibration technology that adjusts measurements to your specific display, achieving accuracy within half a ring size when calibrated correctly. We guide you through a credit-card calibration step so that on-screen dimensions match real-world millimeters. For the most reliable result, calibrate carefully and measure two to three times. While a professional jeweler's mandrel is the gold standard, our tool provides a highly dependable starting point that thousands of users trust every month."
+  },
+  {
+    question: "Can I use this ring sizer on my phone?",
+    answer: "Yes! Our tool works on any device with a modern web browser, including iPhones, Android phones, tablets, laptops, and desktop monitors. The calibration step accounts for your specific screen size and pixel density, so results are accurate regardless of device. For best results on a phone, hold the device in landscape mode when placing your ring on screen, and make sure your screen brightness is turned up so the measurement guides are clearly visible."
+  },
+  {
+    question: "What's the difference between US, UK, and EU ring sizes?",
+    answer: "The three major sizing systems use different scales. US and Canadian sizes run from 1 to 16 in half-size increments and are based on the inner circumference in inches. UK and Australian sizes use an alphabetical scale from A to Z (and beyond), where each letter corresponds to a specific inner circumference. EU and ISO sizes are simply the inner circumference of the ring measured in millimeters, so an EU 52 ring has a 52 mm circumference. Our converter translates between all three systems instantly so you can shop confidently from any international jeweler."
+  },
+  {
+    question: "Does finger size change during the day?",
+    answer: "Yes, fingers swell in heat and humidity and shrink in cold weather. Your fingers are typically largest in the evening and after exercise, and smallest first thing in the morning or when cold. For the most accurate measurement, size your finger at room temperature during the afternoon or evening when your hands are warm but not overheated. Avoid measuring right after a workout, a hot shower, or on a very cold day. Taking readings at different times and averaging them is a smart strategy."
+  },
+  {
+    question: "How to measure ring size for a surprise engagement?",
+    answer: "Measuring a partner's ring size secretly is one of the most common challenges for engagement ring shoppers. You can borrow a ring they already wear on that finger and place it on our on-screen measuring tool. Other clever methods include tracing the inner circle of their ring on paper, pressing it into a bar of soap, or asking a friend or family member who might know. Visit our <a href='/secretly-measure-ring-size' class='text-primary underline hover:text-primary-light'>guide to secretly measuring ring size</a> for a full list of tried-and-tested techniques."
+  },
+  {
+    question: "What if I'm between two sizes?",
+    answer: "If your measurement falls between two sizes, we generally recommend sizing up to the larger size. A slightly loose ring is more comfortable and easier to remove than one that is too tight. Keep in mind that your dominant hand is usually slightly larger, so factor in which hand will wear the ring. If you are purchasing from a jeweler that offers free resizing — such as Blue Nile or James Allen — you can fine-tune the fit after delivery at no extra cost."
+  },
+  {
+    question: "Should I size up for wide bands?",
+    answer: "Yes, wide bands (6 mm or wider) fit more snugly than narrow bands because they cover more surface area on your finger and create additional friction. Most jewelers recommend going up by at least half a size for bands between 6 mm and 8 mm, and a full size up for bands wider than 8 mm. If you are buying a comfort-fit band — which has a slightly domed interior — the difference is less pronounced, but sizing up by a quarter to half size is still advisable."
+  },
+  {
+    question: "How do Oura Ring sizes compare to regular rings?",
+    answer: "Oura uses its own proprietary sizing system that ranges from size 6 to size 13, and these numbers do not correspond directly to US ring sizes. An Oura size 7, for example, has a different inner circumference than a US jewelry size 7. Oura strongly recommends ordering their free sizing kit before purchasing. You can check our <a href='/oura-ring-sizing-guide' class='text-primary underline hover:text-primary-light'>Oura Ring sizing guide</a> for a detailed comparison chart and tips on getting the right fit for your Oura Ring."
+  }
+];
+
+const webAppSchema = generateWebApplicationSchema();
+const faqSchema = generateFAQSchema(faqs);
+const orgSchema = generateOrganizationSchema();
+
+const guides = [
+  { icon: "📏", title: "How to Measure at Home", href: "/how-to-measure-ring-size-at-home", description: "Step-by-step methods using items you already have — string, paper strip, or an existing ring." },
+  { icon: "🖨️", title: "Printable Ring Sizer", href: "/printable-ring-sizer", description: "Download and print our free PDF ring sizer strip for an accurate physical measurement." },
+  { icon: "💍", title: "Secretly Measure Partner's Size", href: "/secretly-measure-ring-size", description: "Clever tricks to find your partner's ring size without spoiling the surprise." },
+  { icon: "🧔", title: "Men's Ring Sizes", href: "/mens-ring-size-chart", description: "Complete men's ring size chart with average sizes, wide-band tips, and comfort-fit advice." },
+  { icon: "💎", title: "Women's Ring Sizes", href: "/womens-ring-size-chart", description: "Women's ring sizing guide covering popular sizes, stackable rings, and seasonal changes." },
+  { icon: "⌚", title: "Oura Ring Sizing", href: "/oura-ring-sizing-guide", description: "Oura Ring uses a unique sizing system — learn how it compares to standard ring sizes." }
+];
+
+const brandGuides = [
+  { name: "Tiffany & Co.", href: "/tiffany-ring-size-guide", note: "US standard sizing" },
+  { name: "Cartier", href: "/cartier-ring-size-guide", note: "EU sizing as default" },
+  { name: "Pandora", href: "/pandora-ring-size-guide", note: "Inner circumference (mm)" },
+  { name: "Blue Nile", href: "/blue-nile-ring-size", note: "US sizing with quarter sizes" },
+  { name: "James Allen", href: "/james-allen-ring-size", note: "US standard sizing" },
+  { name: "Brilliant Earth", href: "/brilliant-earth-ring-size", note: "US sizing with quarter sizes" }
+];
+---
+
+<BaseLayout title={title} description={description}>
+
+  <!-- ===== Hero Section ===== -->
+  <section class="section-padding bg-gradient-to-b from-[#1B4D3E]/5 to-transparent">
+    <div class="container-narrow text-center">
+      <h1 class="text-4xl sm:text-5xl font-bold text-[#1B4D3E] leading-tight mb-4">
+        Find Your Perfect Ring Size
+      </h1>
+      <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed">
+        Free, accurate ring sizing tool — works on any screen. No app required.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#ring-sizer-tool" class="btn-primary text-lg px-8 py-4">
+          Start Measuring &rarr;
+        </a>
+        <a href="/printable-ring-sizer" class="btn-accent text-lg px-8 py-4">
+          Download Printable Sizer
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Ring Sizer Tool ===== -->
+  <section class="section-padding">
+    <div class="container-narrow">
+      <SectionHeading
+        title="Online Ring Sizer Tool"
+        subtitle="Calibrate your screen, then measure your ring or finger for an instant size recommendation."
+        id="ring-sizer-tool-heading"
+      />
+      <RingSizerTool />
+    </div>
+  </section>
+
+  <!-- ===== Quick Size Conversion ===== -->
+  <section class="section-padding bg-gray-50">
+    <div class="container-narrow">
+      <SectionHeading
+        title="Quick Size Conversion"
+        subtitle="Convert between US, UK, and EU ring sizes instantly."
+      />
+      <SizeConverter />
+    </div>
+  </section>
+
+  <!-- ===== Ring Size Chart Preview ===== -->
+  <section class="section-padding">
+    <div class="container-wide">
+      <SectionHeading
+        title="Ring Size Chart"
+        subtitle="Reference chart showing the most common ring sizes across international systems."
+      />
+      <ConversionTable />
+      <div class="text-center mt-8">
+        <a href="/ring-size-chart" class="text-[#1B4D3E] font-semibold hover:text-[#2D7A5F] transition-colors">
+          View Full Chart &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Popular Guides Grid ===== -->
+  <section class="section-padding bg-gray-50">
+    <div class="container-wide">
+      <SectionHeading
+        title="Ring Sizing Guides"
+        subtitle="In-depth resources to help you find the right fit every time."
+      />
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {guides.map((guide) => (
+          <a href={guide.href} class="card hover:shadow-md transition-shadow group">
+            <span class="text-3xl mb-3 block" aria-hidden="true">{guide.icon}</span>
+            <h3 class="text-lg font-bold text-[#1B4D3E] mb-1 group-hover:text-[#2D7A5F] transition-colors">
+              {guide.title}
+            </h3>
+            <p class="text-sm text-gray-600 leading-relaxed">{guide.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Brand Sizing Guides ===== -->
+  <section class="section-padding">
+    <div class="container-wide">
+      <SectionHeading
+        title="Brand Sizing Guides"
+        subtitle="Every jewelry brand sizes a little differently. Find the right size for your favorite brand."
+      />
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {brandGuides.map((brand) => (
+          <a href={brand.href} class="card hover:shadow-md transition-shadow group text-center">
+            <h3 class="text-lg font-bold text-[#1B4D3E] mb-1 group-hover:text-[#2D7A5F] transition-colors">
+              {brand.name}
+            </h3>
+            <p class="text-sm text-gray-500">{brand.note}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ Section ===== -->
+  <section class="section-padding bg-gray-50">
+    <div class="container-narrow">
+      <SectionHeading
+        title="Frequently Asked Questions"
+        subtitle="Answers to the most common ring sizing questions."
+      />
+      <FAQAccordion faqs={faqs} />
+    </div>
+  </section>
+
+  <!-- ===== Trusted Jewelers (Affiliates) ===== -->
+  <section class="section-padding" id="affiliate-section">
+    <div class="container-wide">
+      <SectionHeading
+        title="Trusted Online Jewelers"
+        subtitle="Ready to buy? These top-rated jewelers offer free resizing so you can order with confidence."
+      />
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <AffiliateCard
+          name={affiliates.bluenile.name}
+          url={affiliates.bluenile.url}
+          description={affiliates.bluenile.description}
+          cta={affiliates.bluenile.cta}
+          features={affiliates.bluenile.features}
+          bestFor={affiliates.bluenile.bestFor}
+        />
+        <AffiliateCard
+          name={affiliates.jamesallen.name}
+          url={affiliates.jamesallen.url}
+          description={affiliates.jamesallen.description}
+          cta={affiliates.jamesallen.cta}
+          features={affiliates.jamesallen.features}
+          bestFor={affiliates.jamesallen.bestFor}
+        />
+        <AffiliateCard
+          name={affiliates.brilliantearth.name}
+          url={affiliates.brilliantearth.url}
+          description={affiliates.brilliantearth.description}
+          cta={affiliates.brilliantearth.cta}
+          features={affiliates.brilliantearth.features}
+          bestFor={affiliates.brilliantearth.bestFor}
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Printable Download ===== -->
+  <section class="section-padding bg-gray-50">
+    <div class="container-narrow">
+      <PrintableDownload />
+    </div>
+  </section>
+
+  <!-- ===== Trust Section ===== -->
+  <section class="section-padding">
+    <div class="container-wide">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+        <div class="flex flex-col items-center">
+          <div class="w-14 h-14 bg-[#1B4D3E]/10 rounded-full flex items-center justify-center mb-4">
+            <svg class="w-7 h-7 text-[#1B4D3E]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <p class="text-2xl font-bold text-[#1B4D3E] mb-1">50,000+</p>
+          <p class="text-sm text-gray-600">Trusted by ring shoppers worldwide</p>
+        </div>
+        <div class="flex flex-col items-center">
+          <div class="w-14 h-14 bg-[#1B4D3E]/10 rounded-full flex items-center justify-center mb-4">
+            <svg class="w-7 h-7 text-[#1B4D3E]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <p class="text-2xl font-bold text-[#1B4D3E] mb-1">ISO 8653:2016</p>
+          <p class="text-sm text-gray-600">Based on international sizing standards</p>
+        </div>
+        <div class="flex flex-col items-center">
+          <div class="w-14 h-14 bg-[#1B4D3E]/10 rounded-full flex items-center justify-center mb-4">
+            <svg class="w-7 h-7 text-[#1B4D3E]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <p class="text-2xl font-bold text-[#1B4D3E] mb-1">100% Free</p>
+          <p class="text-sm text-gray-600">Free forever — no account needed</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Schema Markup ===== -->
+  <script type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+
+</BaseLayout>

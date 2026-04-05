@@ -1,0 +1,44 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import BreadcrumbNav from '../components/BreadcrumbNav.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  publishDate?: string;
+  updateDate?: string;
+}
+
+const { title, description, canonical, ogImage, publishDate, updateDate } = Astro.props;
+
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+}
+---
+
+<BaseLayout title={title} description={description} canonical={canonical} ogImage={ogImage}>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 py-10 md:py-14">
+    <BreadcrumbNav items={[{ label: title, href: '#' }]} />
+
+    <header class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-semibold text-gray-900 mb-3">{title}</h1>
+      {updateDate && (
+        <p class="text-sm text-gray-500">Last updated: {formatDate(updateDate)}</p>
+      )}
+      {!updateDate && publishDate && (
+        <p class="text-sm text-gray-500">Published: {formatDate(publishDate)}</p>
+      )}
+    </header>
+
+    <!-- Table of Contents slot -->
+    <slot name="toc" />
+
+    <!-- Main content -->
+    <div class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-a:text-[#1B4D3E] prose-a:font-medium">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

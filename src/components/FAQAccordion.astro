@@ -1,0 +1,100 @@
+---
+// FAQAccordion.astro - Accessible accordion with optional FAQPage schema
+
+interface Props {
+  faqs: { question: string; answer: string }[];
+  generateSchema?: boolean;
+}
+
+const { faqs, generateSchema = true } = Astro.props;
+
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+}
+
+// Build FAQPage structured data
+const faqSchema = generateSchema
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.answer,
+        },
+      })),
+    }
+  : null;
+---
+
+{generateSchema && faqSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+)}
+
+<div class="space-y-3 my-8">
+  {faqs.map((faq) => {
+    const id = slugify(faq.question);
+    return (
+      <details
+        id={id}
+        class="group bg-surface border border-border rounded-lg overflow-hidden transition-all"
+      >
+        <summary class="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer list-none font-medium text-text-primary hover:bg-gray-50 transition-colors select-none">
+          <span>{faq.question}</span>
+          <span class="flex-shrink-0 w-5 h-5 relative" aria-hidden="true">
+            {/* Plus icon (visible when closed) */}
+            <svg
+              class="w-5 h-5 text-text-muted transition-opacity duration-200 group-open:opacity-0 absolute inset-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14M5 12h14" />
+            </svg>
+            {/* Minus icon (visible when open) */}
+            <svg
+              class="w-5 h-5 text-primary transition-opacity duration-200 opacity-0 group-open:opacity-100 absolute inset-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14" />
+            </svg>
+          </span>
+        </summary>
+        <div class="px-5 pb-4 text-text-secondary leading-relaxed">
+          <p set:html={faq.answer} />
+        </div>
+      </details>
+    );
+  })}
+</div>
+
+<script>
+(function () {
+  // Deep-link support: open the targeted FAQ on page load
+  if (window.location.hash) {
+    var target = document.querySelector(window.location.hash);
+    if (target && target.tagName === 'DETAILS') {
+      target.setAttribute('open', '');
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  // Also handle hash changes
+  window.addEventListener('hashchange', function () {
+    if (window.location.hash) {
+      var target = document.querySelector(window.location.hash);
+      if (target && target.tagName === 'DETAILS') {
+        target.setAttribute('open', '');
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  });
+})();
+</script>
