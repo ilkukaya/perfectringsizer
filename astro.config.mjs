@@ -1,9 +1,10 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://perfectringsizer.netlify.app',
-  integrations: [tailwind()],
+  integrations: [tailwind(), sitemap()],
   build: {
     format: 'directory',
   },

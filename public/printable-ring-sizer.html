@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Printable Ring Sizer — PerfectRingSizer.com</title>
+  <style>
+    @page { size: A4; margin: 15mm; }
+    @media print { .no-print { display: none !important; } }
+    body { font-family: Arial, Helvetica, sans-serif; color: #1A1A1A; margin: 0; padding: 20px; }
+    h1 { font-size: 22px; color: #1B4D3E; margin-bottom: 4px; }
+    .subtitle { font-size: 13px; color: #4A4A4A; margin-bottom: 20px; }
+    .warning { background: #FFF3CD; border: 1px solid #F59E0B; border-radius: 6px; padding: 10px 14px; font-size: 13px; margin-bottom: 20px; }
+    .warning strong { color: #92400E; }
+    .calibration { border: 2px dashed #D4AF37; padding: 12px; margin-bottom: 24px; border-radius: 6px; }
+    .calibration p { font-size: 12px; color: #4A4A4A; margin: 4px 0; }
+    .card-box { width: 85.6mm; height: 53.98mm; border: 1.5px solid #1B4D3E; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #8A8A8A; }
+    .strip-section { margin-bottom: 24px; }
+    .strip-section h2 { font-size: 16px; color: #1B4D3E; margin-bottom: 8px; }
+    .strip-section p { font-size: 12px; color: #4A4A4A; }
+    .ring-strip { display: flex; border: 1.5px solid #1B4D3E; border-radius: 4px; overflow: hidden; margin: 12px 0; height: 18mm; }
+    .ring-strip .tick { border-right: 1px solid #ccc; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 2px 0; font-size: 8px; line-height: 1; min-width: 0; box-sizing: border-box; }
+    .ring-strip .tick .size-label { font-weight: bold; font-size: 9px; color: #1B4D3E; }
+    .ring-strip .tick .mm-label { font-size: 7px; color: #8A8A8A; }
+    .circles-section h2 { font-size: 16px; color: #1B4D3E; margin-bottom: 8px; }
+    .circles-section p { font-size: 12px; color: #4A4A4A; margin-bottom: 12px; }
+    .circle-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .circle-item { text-align: center; }
+    .circle-item .ring-circle { border: 1.5px solid #1B4D3E; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 4px; }
+    .circle-item .label { font-size: 9px; font-weight: bold; color: #1B4D3E; }
+    .circle-item .sublabel { font-size: 7px; color: #8A8A8A; }
+    .footer { margin-top: 30px; border-top: 1px solid #E5E5E0; padding-top: 10px; font-size: 10px; color: #8A8A8A; }
+    .btn-print { background: #1B4D3E; color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 8px; cursor: pointer; margin-bottom: 20px; }
+    .btn-print:hover { background: #2D7A5F; }
+  </style>
+</head>
+<body>
+  <div class="no-print" style="text-align:center; margin-bottom:20px;">
+    <button class="btn-print" onclick="window.print()">🖨️ Print This Page</button>
+    <p style="font-size:13px; color:#4A4A4A;">Make sure to print at <strong>100% scale</strong> (do NOT select "Fit to page")</p>
+  </div>
+
+  <h1>Printable Ring Sizer</h1>
+  <p class="subtitle">PerfectRingSizer.com — Free Ring Sizing Tool</p>
+
+  <div class="warning">
+    <strong>⚠️ Important:</strong> Print this page at <strong>actual size (100%)</strong>. Do not select "Fit to page" or "Shrink to fit." Verify the scale using the credit card outline below.
+  </div>
+
+  <!-- Calibration -->
+  <div class="calibration">
+    <p><strong>Scale Verification:</strong> Place a standard credit card over the rectangle below. It should match exactly (85.6mm × 53.98mm).</p>
+    <div class="card-box">Credit Card (85.6 × 54.0 mm)</div>
+    <p>If the card doesn't match, adjust your printer's scale settings to 100%.</p>
+  </div>
+
+  <!-- Finger Wrap Strip -->
+  <div class="strip-section">
+    <h2>Method 1: Finger Wrap Strip</h2>
+    <p>Cut along the border. Wrap around your finger. Read your size where the paper overlaps the markings.</p>
+    <div class="ring-strip">
+      <div class="tick" style="width:44.2mm;"><span class="mm-label">44.2mm</span><span class="size-label">US 3</span></div>
+      <div class="tick" style="width:2.6mm;"><span class="size-label">3½</span></div>
+      <div class="tick" style="width:2.6mm;"><span class="size-label">4</span></div>
+      <div class="tick" style="width:2.5mm;"><span class="size-label">4½</span></div>
+      <div class="tick" style="width:2.5mm;"><span class="size-label">5</span></div>
+      <div class="tick" style="width:2.5mm;"><span class="size-label">5½</span></div>
+      <div class="tick" style="width:2.5mm;"><span class="size-label">6</span></div>
+      <div class="tick" style="width:2.6mm;"><span class="size-label">6½</span></div>
+      <div class="tick" style="width:2.6mm;"><span class="size-label">7</span></div>
+      <div class="tick" style="width:2.5mm;"><span class="size-label">7½</span></div>
+      <div class="tick" style="width:2.4mm;"><span class="size-label">8</span></div>
+      <div class="tick" style="width:2.6mm;"><span class="size-label">8½</span></div>
+      <div class="tick" style="width:2.6mm;"><span class="size-label">9</span></div>
+      <div class="tick" style="width:2.6mm;"><span class="size-label">9½</span></div>
+      <div class="tick" style="width:2.6mm;"><span class="size-label">10</span></div>
+      <div class="tick" style="width:2.5mm;"><span class="size-label">10½</span></div>
+      <div class="tick" style="width:2.5mm;"><span class="size-label">11</span></div>
+      <div class="tick" style="width:2.6mm;"><span class="size-label">11½</span></div>
+      <div class="tick" style="width:2.6mm;"><span class="size-label">12</span></div>
+      <div class="tick" style="width:2.5mm;"><span class="size-label">12½</span></div>
+      <div class="tick" style="width:2.5mm;"><span class="size-label">13</span></div>
+    </div>
+  </div>
+
+  <!-- Ring Circles -->
+  <div class="circles-section">
+    <h2>Method 2: Ring Placement Circles</h2>
+    <p>Place an existing ring over the circles below. The circle that matches the <strong>inside</strong> of your ring is your size.</p>
+    <div class="circle-row">
+      <div class="circle-item">
+        <div class="ring-circle" style="width:14.0mm; height:14.0mm;"></div>
+        <div class="label">US 3</div>
+        <div class="sublabel">14.0mm</div>
+      </div>
+      <div class="circle-item">
+        <div class="ring-circle" style="width:14.9mm; height:14.9mm;"></div>
+        <div class="label">US 4</div>
+        <div class="sublabel">14.9mm</div>
+      </div>
+      <div class="circle-item">
+        <div class="ring-circle" style="width:15.7mm; height:15.7mm;"></div>
+        <div class="label">US 5</div>
+        <div class="sublabel">15.7mm</div>
+      </div>
+      <div class="circle-item">
+        <div class="ring-circle" style="width:16.5mm; height:16.5mm;"></div>
+        <div class="label">US 6</div>
+        <div class="sublabel">16.5mm</div>
+      </div>
+      <div class="circle-item">
+        <div class="ring-circle" style="width:17.3mm; height:17.3mm;"></div>
+        <div class="label">US 7</div>
+        <div class="sublabel">17.3mm</div>
+      </div>
+      <div class="circle-item">
+        <div class="ring-circle" style="width:18.1mm; height:18.1mm;"></div>
+        <div class="label">US 8</div>
+        <div class="sublabel">18.1mm</div>
+      </div>
+      <div class="circle-item">
+        <div class="ring-circle" style="width:19.0mm; height:19.0mm;"></div>
+        <div class="label">US 9</div>
+        <div class="sublabel">19.0mm</div>
+      </div>
+      <div class="circle-item">
+        <div class="ring-circle" style="width:19.8mm; height:19.8mm;"></div>
+        <div class="label">US 10</div>
+        <div class="sublabel">19.8mm</div>
+      </div>
+      <div class="circle-item">
+        <div class="ring-circle" style="width:20.6mm; height:20.6mm;"></div>
+        <div class="label">US 11</div>
+        <div class="sublabel">20.6mm</div>
+      </div>
+      <div class="circle-item">
+        <div class="ring-circle" style="width:21.4mm; height:21.4mm;"></div>
+        <div class="label">US 12</div>
+        <div class="sublabel">21.4mm</div>
+      </div>
+      <div class="circle-item">
+        <div class="ring-circle" style="width:22.2mm; height:22.2mm;"></div>
+        <div class="label">US 13</div>
+        <div class="sublabel">22.2mm</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>© 2026 PerfectRingSizer.com — Based on ISO 8653:2016 standards</p>
+    <p>For best results, verify your size using our free online tool at perfectringsizer.netlify.app</p>
+  </div>
+</body>
+</html>
