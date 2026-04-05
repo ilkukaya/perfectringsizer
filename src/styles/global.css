@@ -1,6 +1,19 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1B4D3E;
+  --color-primary-light: #2D7A5F;
+  --color-accent: #D4AF37;
+  --color-accent-light: #F0D875;
+  --color-surface: #FFFFFF;
+  --color-background: #FAFAF8;
+  --color-border: #E5E5E0;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #4A4A4A;
+  --color-text-muted: #8A8A8A;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
 
 @layer base {
   html {
